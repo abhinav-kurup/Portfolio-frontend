@@ -1,0 +1,163 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Code, ArrowRight, MessageSquare } from "lucide-react";
+import { fadeIn, staggerContainer } from "@/lib/motion";
+
+// Updated projects data
+const projects = [
+	{
+		id: 1,
+		title: "DocuMind AI",
+		impact: "Agent-Based Document Intelligence System",
+		description:
+			"Built a RAG-based document intelligence system using LangChain, ChromaDB vector embeddings, and LLMs to deliver citation-backed semantic question-answering.",
+		stack: ["LangChain", "ChromaDB", "Python", "LLMs"],
+		links: {
+			github: "https://github.com/abhinav-kurup",
+			live: "https://example.com/documind-ai",
+		},
+	},
+	{
+		id: 2,
+		title: "CollabWrite",
+		impact: "Real-Time Collaborative Writing Platform",
+		description:
+			"Built a real-time collaborative backend using FastAPI and WebSockets, enabling low-latency multi-user document synchronization with OAuth2/JWT authentication.",
+		stack: ["FastAPI", "WebSockets", "Redis", "Hugging Face"],
+		links: {
+			github: "https://github.com/abhinav-kurup",
+			live: "https://example.com/collabwrite",
+		},
+	},
+];
+
+const projectCategories = ["All", "AI", "Backend", "DevOps"];
+
+export function ProjectsSection() {
+	const [activeCategory, setActiveCategory] = useState("All");
+
+	const filtered =
+		activeCategory === "All"
+			? projects
+			: projects.filter((p) => p.stack.includes(activeCategory));
+
+	return (
+		<section id="projects" className="section-padding relative overflow-hidden">
+			{/* Background glow */}
+			<div className="pointer-events-none absolute inset-0 -z-10">
+				<div className="absolute top-1/2 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]" />
+			</div>
+
+			<motion.div
+				variants={staggerContainer}
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, margin: "-100px" }}
+				className="mx-auto max-w-6xl px-6"
+			>
+				{/* Section header */}
+				<motion.div variants={fadeIn} className="mb-12">
+					<p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+						Portfolio
+					</p>
+					<h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+						Selected Work
+					</h2>
+					<p className="mt-4 max-w-2xl text-base text-muted-foreground/80">
+						A showcase of my work, featuring projects that demonstrate my skills
+						and expertise in backend engineering.
+					</p>
+				</motion.div>
+
+				{/* Filter tabs */}
+				<motion.div
+					variants={fadeIn}
+					className="mb-8 flex gap-2 overflow-x-auto pb-2 scrollbar-none"
+				>
+					{projectCategories.map((cat) => (
+						<button
+							key={cat}
+							onClick={() => setActiveCategory(cat)}
+							className={`shrink-0 rounded-full border px-5 py-1.5 text-sm font-medium transition-all ${activeCategory === cat
+									? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+									: "border-border/60 text-muted-foreground hover:border-border hover:text-foreground hover:bg-muted/30"
+								}`}
+						>
+							{cat}
+						</button>
+					))}
+				</motion.div>
+
+				{/* Project cards */}
+				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{filtered.map((project) => (
+						<motion.div
+							key={project.id}
+							variants={fadeIn}
+							className="group flex flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+						>
+							{/* Title */}
+							<h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+								{project.title}
+							</h3>
+
+							{/* Impact */}
+							<p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary/80">
+								{project.impact}
+							</p>
+
+							{/* Description */}
+							<p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+								{project.description}
+							</p>
+
+							{/* Stack tags */}
+							<div className="mt-auto pt-6 flex flex-wrap gap-2">
+								{project.stack.map((tech) => (
+									<span
+										key={tech}
+										className="rounded-md bg-muted/50 border border-border/40 px-2 py-0.5 text-[10px] font-medium text-muted-foreground"
+									>
+										{tech}
+									</span>
+								))}
+							</div>
+
+							{/* Actions */}
+							<div className="mt-6 flex flex-wrap items-center gap-4 border-t border-border/40 pt-4">
+								{project.links.github && (
+									<a
+										href={project.links.github}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
+									>
+										<Code size={14} />
+										Code
+									</a>
+								)}
+								{project.links.live && (
+									<a
+										href={project.links.live}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
+									>
+										<ExternalLink size={14} />
+										Live
+									</a>
+								)}
+								<button className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
+									<MessageSquare size={12} />
+									Ask AI
+								</button>
+							</div>
+						</motion.div>
+					))}
+				</div>
+			</motion.div>
+		</section>
+	);
+}
