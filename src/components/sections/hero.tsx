@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, FileText, MessageSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { siteConfig, stats } from "@/data/site";
 import { fadeIn, fadeInDelay, staggerContainer } from "@/lib/motion";
@@ -109,16 +110,16 @@ export function HeroSection() {
           variants={fadeInDelay(0.3)}
           className="mt-8 flex flex-col gap-5 sm:flex-row"
         >
-          <Button
-            size="lg"
-            className="group/btn h-16 min-w-[220px] rounded-xl px-8 text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-            asChild
+          <a 
+            href="#projects" 
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "group/btn h-16 min-w-[220px] rounded-xl px-8 text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+            )}
           >
-            <a href="#projects" className="flex items-center justify-center gap-2">
-              View Projects
-              <ArrowDown size={20} className="transition-transform group-hover/btn:translate-y-1" />
-            </a>
-          </Button>
+            View Projects
+            <ArrowDown size={20} className="transition-transform group-hover/btn:translate-y-1" />
+          </a>
           <Button
             variant="outline"
             size="lg"

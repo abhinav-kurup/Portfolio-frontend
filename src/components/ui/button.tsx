@@ -42,7 +42,7 @@ const buttonVariants = cva(
 )
 
 export const Button = forwardRef<HTMLButtonElement, ButtonPrimitive.Props & VariantProps<typeof buttonVariants>>(
-  ({ asChild, variant, size, className, ...props }, ref) => {
+  ({ variant, size, className, ...props }, ref) => {
     return (
       <ButtonPrimitive
         ref={ref}
