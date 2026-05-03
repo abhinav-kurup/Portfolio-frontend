@@ -108,30 +108,30 @@ export function HeroSection() {
         {/* CTAs */}
         <motion.div
           variants={fadeInDelay(0.3)}
-          className="mt-8 flex flex-col gap-5 sm:flex-row"
+          className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-stretch"
         >
           <a 
             href="#projects" 
             className={cn(
               buttonVariants({ size: "lg" }),
-              "group/btn h-16 min-w-[220px] rounded-xl px-8 text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              "group/btn w-full sm:w-[210px] h-auto py-3.5 rounded-xl px-6 text-sm font-semibold shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
             )}
           >
             View Projects
-            <ArrowDown size={20} className="transition-transform group-hover/btn:translate-y-1" />
+            <ArrowDown size={18} className="transition-transform group-hover/btn:translate-y-1" />
           </a>
           <Button
             variant="outline"
             size="lg"
-            className="h-auto w-full sm:w-auto sm:min-w-[380px] py-4 rounded-xl border-border/60 bg-background/50 px-6 sm:px-8 text-left backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-muted/30 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-start gap-4 sm:gap-5"
+            className="w-full sm:w-[320px] h-auto py-3.5 rounded-xl border-border/60 bg-background/50 px-5 text-left whitespace-normal backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-muted/30 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-start gap-3"
             onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <MessageSquare size={24} />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <MessageSquare size={20} />
             </div>
-            <div className="flex flex-col gap-1.5">
-              <span className="text-lg font-bold leading-none text-foreground">Ask My AI</span>
-              <span className="text-xs sm:text-sm leading-tight text-muted-foreground/70 font-mono tracking-tight">Powered by RAG and production-grade overthinking.</span>
+            <div className="flex flex-col gap-1 items-start">
+              <span className="text-sm font-bold leading-none text-foreground">Ask My AI</span>
+              <span className="text-[10px] sm:text-[11px] leading-tight text-muted-foreground/70 font-mono tracking-tight text-left">Powered by RAG and production-grade overthinking.</span>
             </div>
           </Button>
         </motion.div>

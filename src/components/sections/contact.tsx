@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, Link, Code, FileText } from "lucide-react";
+import { Send, Mail, Link, Code, FileText, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig, socialLinks } from "@/data/site";
 import { fadeIn, staggerContainer } from "@/lib/motion";
@@ -43,7 +43,7 @@ export function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-2 items-start">
           {/* Contact form */}
           <motion.form
             variants={fadeIn}
@@ -116,11 +116,8 @@ export function ContactSection() {
           </motion.form>
 
           {/* Quick links */}
-          <motion.div variants={fadeIn} className="space-y-4">
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
-            >
+          <motion.div variants={fadeIn} className="space-y-4 lg:mt-[-190px]">
+            <div className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5">
               <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <Mail size={20} />
               </div>
@@ -130,50 +127,47 @@ export function ContactSection() {
                   {siteConfig.email}
                 </p>
               </div>
-            </a>
-
-            {socialLinks.map((link) => {
-              const Icon =
-                link.icon === "Github"
-                  ? Code
-                  : link.icon === "Linkedin"
-                    ? Link
-                    : Mail;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
-                >
-                  <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Icon size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-foreground">
-                      {link.label}
-                    </p>
-                    <p className="text-xs font-medium text-muted-foreground/70">{link.href}</p>
-                  </div>
-                </a>
-              );
-            })}
+            </div>
 
             <a
-              href={siteConfig.resumeUrl}
+              href="https://github.com/abhinav-kurup"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
             >
               <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <FileText size={20} />
+                <Code size={20} />
               </div>
               <div>
-                <p className="text-sm font-bold text-foreground">Resume</p>
-                <p className="text-xs font-medium text-muted-foreground/70">Download PDF</p>
+                <p className="text-sm font-bold text-foreground">GitHub</p>
+                <p className="text-xs font-medium text-muted-foreground/70">github.com/abhinav-kurup</p>
               </div>
             </a>
+
+            <a
+              href="https://linkedin.com/in/abhinav-kurup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+            >
+              <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <Link size={20} />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">LinkedIn</p>
+                <p className="text-xs font-medium text-muted-foreground/70">linkedin.com/in/abhinav-kurup</p>
+              </div>
+            </a>
+
+            <div className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5">
+              <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <Phone size={20} />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">Phone</p>
+                <p className="text-xs font-medium text-muted-foreground/70">{siteConfig.phone}</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </motion.div>

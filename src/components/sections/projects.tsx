@@ -68,15 +68,15 @@ export function ProjectsSection() {
 						<motion.div
 							key={project.id}
 							variants={fadeIn}
-							className="group flex min-w-[85vw] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] shrink-0 snap-start flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+							className="group flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] snap-start flex-col rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
 						>
 							{/* Title */}
-							<h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+							<h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
 								{project.title}
 							</h3>
 
 							{/* Impact */}
-							<p className="mt-1 text-xs font-semibold uppercase tracking-wider text-primary/80">
+							<p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-primary">
 								{project.impact}
 							</p>
 

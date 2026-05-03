@@ -7,7 +7,8 @@ export const siteConfig = {
   tagline: "I build robust, scalable backend systems that power real products.",
   description:
     "Backend-focused engineer specializing in Python, FastAPI, and distributed systems. I design APIs, architect data pipelines, and ship production-grade infrastructure.",
-  email: "abhinav@example.com",
+  email: "abhinavkurup11@gmail.com",
+  phone: "+91 9404504260",
   resumeUrl: "/resume.pdf",
   avatarUrl: "/remove1.png",
 };
@@ -24,9 +25,9 @@ export const navLinks: NavLink[] = [
 
 // ─── Socials ────────────────────────────────────────────────
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", href: "https://github.com", icon: "Github" },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin" },
-  { label: "Email", href: "mailto:abhinav@example.com", icon: "Mail" },
+  { label: "GitHub", href: "https://github.com/abhinav-kurup/", icon: "Github" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhinav-kurup/", icon: "Linkedin" },
+  { label: "Email", href: "mailto:abhinavkurup11@gmail.com", icon: "Mail" },
 ];
 
 // ─── About section value cards ──────────────────────────────
@@ -55,8 +56,8 @@ export const valueCards: ValueCard[] = [
 
 // ─── Quick stats ────────────────────────────────────────────
 export const stats: Stat[] = [
-  { label: "Projects Shipped", value: "8+" },
-  { label: "Backend Systems", value: "5+" },
+  { label: "Projects Shipped", value: "3" },
+  { label: "Backend Systems", value: "15+" },
   { label: "Requests Handled", value: "1000+" },
   {
     label: "AVG RESPONSE TIME",

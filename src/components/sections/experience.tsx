@@ -51,18 +51,10 @@ export function ExperienceSection() {
                   </div>
                 </div>
 
-                {/* Impact bullets */}
-                <ul className="mt-5 space-y-3">
-                  {exp.impact.map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground/80"
-                    >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/40 group-hover:bg-primary/60 transition-colors" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                {/* Impact description */}
+                <p className="mt-5 text-sm leading-relaxed text-muted-foreground/80">
+                  {exp.impact}
+                </p>
 
                 {/* Stack tags + Ask AI */}
                 <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-border/40 pt-5">

@@ -6,12 +6,8 @@ export const experiences: Experience[] = [
     role: "Associate Software Engineer",
     company: "Infuse Consultancy",
     period: "August 2024 – Present",
-    impact: [
-      "Developed and maintained enterprise automation platform, focusing on performance and scalability.",
-      "Built a BFF-based identity security layer using AWS API Gateway Authorizers to manage JWT lifecycle server-side.",
-      "Built a Python-based automation framework, achieving an 85% defect detection rate.",
-      "Maintained Jenkins CI/CD pipelines with Docker; integrated Allure dashboards for centralized reporting.",
-    ],
+    impact:
+      "Built and maintained Python backend systems for enterprise automation workflows, with a focus on reliability and scalability. Designed automation frameworks and CI/CD pipelines to improve delivery stability, release consistency, and operational efficiency.",
     stack: ["Python", "AWS", "Docker", "Jenkins", "Pytest"],
   },
   {
@@ -19,11 +15,8 @@ export const experiences: Experience[] = [
     role: "Backend Engineer (Freelance)",
     company: "BlueSkript",
     period: "July 2025 – Jan 2026",
-    impact: [
-      "Architected an event-driven serverless pipeline using AWS SQS and Lambda for WhatsApp integration.",
-      "Implemented a Blue/Green deployment strategy on AWS ECS, achieving zero-downtime releases.",
-      "Designed and deployed a scalable backend using Django REST Framework and PostgreSQL.",
-    ],
+    impact:
+      "Built and shipped backend systems for cloud-based operational platforms used in live business environments, with ownership across backend architecture, core service design, and production delivery. Designed scalable backend workflows, asynchronous processing pipelines, and deployment infrastructure to support reliable operations at scale.",
     stack: ["Django", "AWS Lambda", "SQS", "ECS", "PostgreSQL"],
   },
   {
@@ -31,10 +24,8 @@ export const experiences: Experience[] = [
     role: "Lead Backend Developer",
     company: "Goa Police",
     period: "July 2023 – Dec 2023",
-    impact: [
-      "Transformed legacy beat-book system into scalable cloud-based mobile/web platforms for 1,000+ field officers across Goa, under a state initiative backed by the Chief Minister’s office.",
-      "Engineered geospatial APIs using Django, PostgreSQL, and PostGIS for real-time tracking and optimized spatial queries for officers in the field.",
-    ],
+    impact:
+      "Led the backend development of a cloud-based operational platform for large-scale field coordination and workflow management. Built backend systems supporting geospatial workflows, reporting, and real-time operational visibility in live field environments.",
     stack: ["Python", "Django", "PostgreSQL", "PostGIS", "GeoServer"],
   },
 ];
