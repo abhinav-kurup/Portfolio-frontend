@@ -142,7 +142,7 @@ export function HeroSection() {
           className="mt-16 grid grid-cols-2 gap-8 border-t border-border/40 pt-8 sm:grid-cols-4"
         >
           {stats.map((stat) => (
-            <div key={stat.label} className="group/stat transition-transform hover:-translate-y-1">
+            <div key={stat.label} className="group/stat transition-transform hover:-translate-y-1 flex flex-col items-center text-center">
               <p className="text-4xl font-bold text-foreground group-hover/stat:text-primary transition-colors sm:text-5xl">{stat.value}</p>
               <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground/70 group-hover/stat:text-muted-foreground transition-colors">
                 {stat.label}
