@@ -11,7 +11,7 @@ export const fadeIn = {
     y: 0,
     transition: { duration: 0.5, ease: "easeOut" },
   },
-};
+} as const;
 
 export const fadeInDelay = (delay: number) => ({
   hidden: { opacity: 0, y: 20 },
@@ -20,7 +20,7 @@ export const fadeInDelay = (delay: number) => ({
     y: 0,
     transition: { duration: 0.5, ease: "easeOut", delay },
   },
-});
+} as const);
 
 export const staggerContainer = {
   hidden: {},
@@ -29,9 +29,9 @@ export const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-};
+} as const;
 
 export const subtleHover = {
   scale: 1.02,
   transition: { duration: 0.2, ease: "easeOut" },
-};
+} as const;
