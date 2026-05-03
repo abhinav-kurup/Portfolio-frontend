@@ -1,0 +1,214 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, X, Bot, User, Loader2, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "assistant", content: "Hi! I'm Abhinav's AI assistant. Ask me anything about his experience or projects." }
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleToggle = () => setIsOpen((prev) => !prev);
+    const handleOpen = () => setIsOpen(true);
+
+    window.addEventListener("toggle-chat", handleToggle);
+    window.addEventListener("open-chat", handleOpen);
+
+    return () => {
+      window.removeEventListener("toggle-chat", handleToggle);
+      window.removeEventListener("open-chat", handleOpen);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage: Message = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/chat/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
+
+      const data = await response.json();
+
+      if (data.response) {
+        // Simulate streaming/typing effect
+        const fullResponse = data.response;
+        let currentText = "";
+        const assistantMessage: Message = { role: "assistant", content: "" };
+        setMessages((prev) => [...prev, assistantMessage]);
+
+        const words = fullResponse.split(" ");
+        for (let i = 0; i < words.length; i++) {
+          currentText += (i === 0 ? "" : " ") + words[i];
+          setMessages((prev) => {
+            const newMessages = [...prev];
+            newMessages[newMessages.length - 1] = { role: "assistant", content: currentText };
+            return newMessages;
+          });
+          await new開心(10 + Math.random() * 20); // Delay for typing feel
+        }
+      }
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Sorry, I'm having trouble connecting to the backend right now." }
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Helper for delay
+  function new開心(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  return (
+    <>
+      {/* Trigger Button (Exported to be used in Hero if needed, or floating) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button
+          onClick={() => setIsOpen(true)}
+          size="lg"
+          className="h-14 w-14 rounded-full shadow-2xl shadow-primary/20"
+        >
+          <MessageSquare size={24} />
+        </Button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[400px] overflow-hidden rounded-2xl border border-border/50 bg-background/95 shadow-2xl backdrop-blur-xl sm:w-[400px]"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-border/50 bg-primary/5 px-6 py-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Bot size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-foreground">Ask AI</h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <span className="text-[10px] font-medium text-muted-foreground">Online</span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div
+              ref={scrollRef}
+              className="h-[400px] overflow-y-auto px-6 py-6 scroll-smooth"
+            >
+              <div className="flex flex-col gap-6">
+                {messages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div
+                      className={`flex max-w-[85%] gap-3 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"
+                        }`}
+                    >
+                      <div className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
+                        }`}>
+                        {msg.role === "user" ? <User size={14} /> : <Bot size={14} />}
+                      </div>
+                      <div
+                        className={`select-text rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${msg.role === "user"
+                            ? "bg-primary text-primary-foreground shadow-lg shadow-primary/10 rounded-tr-none"
+                            : "bg-muted/50 text-foreground rounded-tl-none border border-border/20"
+                          }`}
+                      >
+                        {msg.content}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {isLoading && messages[messages.length - 1].role === "user" && (
+                  <div className="flex justify-start">
+                    <div className="flex gap-3">
+                      <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-muted text-foreground">
+                        <Bot size={14} />
+                      </div>
+                      <div className="flex items-center gap-1 rounded-2xl bg-muted/50 px-4 py-2.5">
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.2s]" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.4s]" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Input */}
+            <div className="border-t border-border/50 p-4 bg-background/50">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSend();
+                }}
+                className="relative"
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Ask me anything..."
+                  className="w-full rounded-xl border border-border/50 bg-background/50 py-3 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isLoading}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-primary p-1.5 text-primary-foreground hover:opacity-90 disabled:opacity-50 transition-all"
+                >
+                  {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                </button>
+              </form>
+              <p className="mt-2 text-center text-[10px] text-muted-foreground/60">
+                Powered by Abhinav's Portfolio AI
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

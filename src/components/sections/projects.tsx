@@ -5,35 +5,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Code, ArrowRight, MessageSquare } from "lucide-react";
 import { fadeIn, staggerContainer } from "@/lib/motion";
 
-// Updated projects data
-const projects = [
-	{
-		id: 1,
-		title: "DocuMind AI",
-		impact: "Agent-Based Document Intelligence System",
-		description:
-			"Built a RAG-based document intelligence system using LangChain, ChromaDB vector embeddings, and LLMs to deliver citation-backed semantic question-answering.",
-		stack: ["LangChain", "ChromaDB", "Python", "LLMs"],
-		links: {
-			github: "https://github.com/abhinav-kurup",
-			live: "https://example.com/documind-ai",
-		},
-	},
-	{
-		id: 2,
-		title: "CollabWrite",
-		impact: "Real-Time Collaborative Writing Platform",
-		description:
-			"Built a real-time collaborative backend using FastAPI and WebSockets, enabling low-latency multi-user document synchronization with OAuth2/JWT authentication.",
-		stack: ["FastAPI", "WebSockets", "Redis", "Hugging Face"],
-		links: {
-			github: "https://github.com/abhinav-kurup",
-			live: "https://example.com/collabwrite",
-		},
-	},
-];
-
-const projectCategories = ["All", "AI", "Backend", "DevOps"];
+import { projects, projectCategories } from "@/data/projects";
 
 export function ProjectsSection() {
 	const [activeCategory, setActiveCategory] = useState("All");
@@ -41,7 +13,7 @@ export function ProjectsSection() {
 	const filtered =
 		activeCategory === "All"
 			? projects
-			: projects.filter((p) => p.stack.includes(activeCategory));
+			: projects.filter((p) => p.category === activeCategory);
 
 	return (
 		<section id="projects" className="section-padding relative overflow-hidden">
@@ -90,13 +62,13 @@ export function ProjectsSection() {
 					))}
 				</motion.div>
 
-				{/* Project cards */}
-				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{/* Project cards slider */}
+				<div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none">
 					{filtered.map((project) => (
 						<motion.div
 							key={project.id}
 							variants={fadeIn}
-							className="group flex flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+							className="group flex min-w-[85vw] sm:min-w-[calc(50%-12px)] lg:min-w-[calc(33.333%-16px)] shrink-0 snap-start flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
 						>
 							{/* Title */}
 							<h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
@@ -138,21 +110,6 @@ export function ProjectsSection() {
 										Code
 									</a>
 								)}
-								{project.links.live && (
-									<a
-										href={project.links.live}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
-									>
-										<ExternalLink size={14} />
-										Live
-									</a>
-								)}
-								<button className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
-									<MessageSquare size={12} />
-									Ask AI
-								</button>
 							</div>
 						</motion.div>
 					))}

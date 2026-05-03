@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, FileText } from "lucide-react";
+import { ArrowDown, FileText, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { siteConfig, stats } from "@/data/site";
 import { fadeIn, fadeInDelay, staggerContainer } from "@/lib/motion";
 
@@ -10,7 +11,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col justify-start px-6 pt-20 pb-12 md:pt-32 md:pb-20"
+      className="relative flex flex-col justify-start px-6 pt-12 pb-12 md:pt-20 md:pb-20"
     >
       {/* Decorative background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -23,52 +24,94 @@ export function HeroSection() {
         animate="visible"
         className="mx-auto w-full max-w-6xl"
       >
-        {/* Status badge */}
-        <motion.div variants={fadeIn} className="mb-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-            </span>
-            Available for opportunities
-          </span>
+
+        {/* Terminal Status Badges */}
+        <motion.div variants={fadeIn} className="mb-10 flex flex-wrap items-center gap-4">
+          <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-primary/20 bg-[#0a0a0a] px-4 py-2 font-mono text-xs tracking-tight text-primary/90 shadow-2xl">
+            <span className="text-emerald-500">$</span>
+            <span className="text-muted-foreground">status</span>
+            <span className="text-primary/40">→</span>
+            <span className="animate-pulse text-emerald-400">available_for_opportunities</span>
+          </div>
+
+          <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-white/5 bg-[#0a0a0a] px-4 py-2 font-mono text-xs tracking-tight text-muted-foreground/80 shadow-2xl">
+            <span className="text-blue-500">$</span>
+            <span className="text-muted-foreground/60">currently_building</span>
+            <span className="text-primary/40">→</span>
+            <span className="text-blue-400/80">ai_chat_backend</span>
+          </div>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          variants={fadeIn}
-          className="max-w-3xl font-heading text-6xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-7xl lg:text-8xl"
-        >
-          <span className="bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent">
-            {siteConfig.name}
-          </span>
-          <span className="text-primary">.</span>
-        </motion.h1>
+        {/* Headline & Photo */}
+        <div className="flex flex-col items-start gap-12 md:flex-row md:items-center lg:gap-24">
+          <div className="flex-1">
+            <motion.h1
+              variants={fadeIn}
+              className="font-heading text-7xl font-bold leading-[1.0] tracking-tight text-foreground sm:text-8xl lg:text-9xl"
+            >
+              <span className="bg-gradient-to-r from-foreground via-foreground to-primary/50 bg-clip-text text-transparent">
+                {siteConfig.name}
+              </span>
+              <span className="text-primary">.</span>
+            </motion.h1>
 
-        {/* Role */}
-        <motion.p
-          variants={fadeInDelay(0.1)}
-          className="mt-3 text-xl font-medium text-muted-foreground sm:text-2xl"
-        >
-          {siteConfig.role}
-        </motion.p>
+            {/* Role & Secondary Role */}
+            <motion.div
+              variants={fadeInDelay(0.1)}
+              className="mt-6 flex items-center gap-4 text-xl font-medium sm:text-2xl"
+            >
+              <span className="text-foreground">{siteConfig.role}</span>
+              <div className="h-[2px] w-8 bg-primary/40" />
+              <span className="text-muted-foreground/60 font-normal">API Architect</span>
+            </motion.div>
 
-        {/* Value prop */}
-        <motion.p
-          variants={fadeInDelay(0.2)}
-          className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground/80"
-        >
-          {siteConfig.tagline}
-        </motion.p>
+            {/* Value prop */}
+            <motion.p
+              variants={fadeInDelay(0.2)}
+              className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground/80"
+            >
+              I build robust, scalable backend systems that power real products. Clean code. Real impact.
+            </motion.p>
+          </div>
+
+          {/* Photo with Ring & Experience */}
+          <motion.div
+            variants={fadeInDelay(0.1)}
+            className="relative flex-shrink-0"
+          >
+            {/* Rotating Ring */}
+            <div className="absolute -inset-4 animate-[spin_8s_linear_infinite] rounded-full border-2 border-transparent border-t-primary/30 border-r-primary/10" />
+
+            <div className="relative h-48 w-48 overflow-hidden rounded-full border-4 border-background bg-muted shadow-2xl sm:h-56 sm:w-56 md:h-72 md:w-72 lg:h-80 lg:w-80">
+              <Image
+                src={siteConfig.avatarUrl}
+                alt={siteConfig.name}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-110"
+                priority
+                sizes="(max-width: 768px) 192px, (max-width: 1024px) 288px, 320px"
+              />
+            </div>
+
+            {/* Experience Badge */}
+            <div className="absolute -right-2 bottom-6 md:right-4 md:bottom-10">
+              <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-background/90 px-4 py-2 font-mono text-xs backdrop-blur-md shadow-xl">
+                <span className="text-primary/40">{"{"}</span>
+                <span className="text-primary font-bold">2yrs exp</span>
+                <span className="text-primary/40">{"}"}</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
         {/* CTAs */}
         <motion.div
           variants={fadeInDelay(0.3)}
-          className="mt-12 flex flex-col gap-5 sm:flex-row"
+          className="mt-8 flex flex-col gap-5 sm:flex-row"
         >
           <Button
             size="lg"
-            className="group/btn h-14 min-w-[220px] rounded-xl px-8 text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="group/btn h-16 min-w-[220px] rounded-xl px-8 text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
             asChild
           >
             <a href="#projects" className="flex items-center justify-center gap-2">
@@ -79,13 +122,16 @@ export function HeroSection() {
           <Button
             variant="outline"
             size="lg"
-            className="h-14 min-w-[220px] rounded-xl border-border/60 bg-background/50 px-8 text-base backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-muted/30 hover:scale-[1.02] active:scale-[0.98]"
-            asChild
+            className="h-auto w-full sm:w-auto sm:min-w-[380px] py-4 rounded-xl border-border/60 bg-background/50 px-6 sm:px-8 text-left backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-muted/30 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-start gap-4 sm:gap-5"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-chat"))}
           >
-            <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-              <FileText size={20} />
-              Resume
-            </a>
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <MessageSquare size={24} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-lg font-bold leading-none text-foreground">Ask My AI</span>
+              <span className="text-xs sm:text-sm leading-tight text-muted-foreground/70 font-mono tracking-tight">Powered by RAG and production-grade overthinking.</span>
+            </div>
           </Button>
         </motion.div>
 
@@ -97,9 +143,14 @@ export function HeroSection() {
           {stats.map((stat) => (
             <div key={stat.label} className="group/stat transition-transform hover:-translate-y-1">
               <p className="text-4xl font-bold text-foreground group-hover/stat:text-primary transition-colors sm:text-5xl">{stat.value}</p>
-              <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60 group-hover/stat:text-muted-foreground transition-colors">
+              <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground/70 group-hover/stat:text-muted-foreground transition-colors">
                 {stat.label}
               </p>
+              {stat.description && (
+                <p className="mt-1 text-xs italic text-muted-foreground/50 group-hover/stat:text-muted-foreground/70 transition-colors">
+                  {stat.description}
+                </p>
+              )}
             </div>
           ))}
         </motion.div>

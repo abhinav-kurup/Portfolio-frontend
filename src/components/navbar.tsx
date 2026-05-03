@@ -11,14 +11,26 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        {/* Logo */}
-        <a
-          href="#"
-          className="font-heading text-xl font-bold tracking-tight text-foreground hover:opacity-80 transition-opacity"
-        >
-          {siteConfig.name}
-          <span className="text-primary">.</span>
-        </a>
+        {/* Logo & Status */}
+        <div className="flex items-center gap-4">
+          <a
+            href="#"
+            className="font-heading text-xl font-bold tracking-tight text-foreground hover:opacity-80 transition-opacity"
+          >
+            {siteConfig.name}
+            <span className="text-primary">.dev</span>
+          </a>
+
+          <div className="hidden sm:block">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[10px] font-medium text-primary">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+              </span>
+              Available
+            </span>
+          </div>
+        </div>
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-8 md:flex">

@@ -8,9 +8,9 @@ export const projects: Project[] = [
     description:
       "A production RAG system using LangGraph, ChromaDB, and FastAPI for intelligent document Q&A with streaming responses.",
     stack: ["Python", "FastAPI", "LangGraph", "ChromaDB", "React"],
-    category: "AI/ML",
+    category: "AI",
     links: {
-      github: "https://github.com",
+      github: "https://github.com/abhinav-kurup/Documind",
       deepDive: "/projects/documind",
     },
   },
@@ -21,10 +21,9 @@ export const projects: Project[] = [
     description:
       "A Google Docs-style collaborative writing platform with operational transform, WebSocket sync, and rich text editing.",
     stack: ["Python", "FastAPI", "WebSockets", "PostgreSQL", "Redis"],
-    category: "Full-Stack",
+    category: "Backend",
     links: {
-      github: "https://github.com",
-      live: "https://collabwrite.dev",
+      github: "https://github.com/abhinav-kurup/CollabWrite",
       deepDive: "/projects/collabwrite",
     },
   },
@@ -37,20 +36,41 @@ export const projects: Project[] = [
     stack: ["Python", "Django", "Celery", "PostgreSQL", "Docker"],
     category: "Backend",
     links: {
-      github: "https://github.com",
       deepDive: "/projects/ems-backend",
     },
   },
   {
     id: "proj-4",
     title: "Portfolio Website",
-    impact: "Sub-second load times with 95+ Lighthouse score",
+    impact: "FastAPI-powered portfolio with integrated RAG agent",
     description:
-      "This portfolio — built with Next.js 15 App Router, Tailwind CSS, and a FastAPI RAG chatbot for interactive exploration.",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI"],
-    category: "Full-Stack",
+      "A static frontend layered over a robust backend AI service. Built with Next.js 15, integrating a custom FastAPI application for real-time, context-aware chatbot inference.",
+    stack: ["FastAPI", "Python", "Next.js", "TypeScript"],
+    category: "Backend",
     links: {
-      github: "https://github.com",
+      github: "https://github.com/abhinav-kurup/Portfolio-backend",
+    },
+  },
+  {
+    id: "proj-5",
+    title: "Django ECS Cluster",
+    impact: "ECS + EC2 Cluster for Django Application",
+    description:
+      "Deployed a scalable ECS cluster on EC2 instances to run a containerized Django application hosted on Amazon ECR. The infrastructure is provisioned using AWS CloudFormation, ensuring a robust and automated deployment process.",
+    stack: ["AWS ECS", "AWS EC2", "CloudFormation", "Django", "Docker"],
+    category: "DevOps",
+    links: {},
+  },
+  {
+    id: "proj-6",
+    title: "MediAssist AI",
+    impact: "AI-POWERED SYMPTOM ANALYSIS SYSTEM",
+    description:
+      "Built an AI-assisted symptom analysis system using LangChain, Qdrant, and a quantized Llama 2 model to generate preliminary condition predictions from user-reported symptoms. Designed for lightweight local inference with retrieval-backed medical context and low-latency response generation.",
+    stack: ["Python", "Flask", "LangChain", "Llama 2"],
+    category: "AI",
+    links: {
+      github: "https://github.com/abhinav-kurup/ibw-medbot",
     },
   },
 ];

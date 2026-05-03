@@ -9,6 +9,7 @@ export const siteConfig = {
     "Backend-focused engineer specializing in Python, FastAPI, and distributed systems. I design APIs, architect data pipelines, and ship production-grade infrastructure.",
   email: "abhinav@example.com",
   resumeUrl: "/resume.pdf",
+  avatarUrl: "/remove1.png",
 };
 
 // ─── Navigation ─────────────────────────────────────────────
@@ -56,6 +57,10 @@ export const valueCards: ValueCard[] = [
 export const stats: Stat[] = [
   { label: "Projects Shipped", value: "8+" },
   { label: "Backend Systems", value: "5+" },
-  { label: "Tech Stack Depth", value: "15+" },
-  { label: "Articles Written", value: "4+" },
+  { label: "Requests Handled", value: "1000+" },
+  {
+    label: "AVG RESPONSE TIME",
+    value: "42ms",
+    description: "(emotionally unavailable, technically fast)",
+  },
 ];

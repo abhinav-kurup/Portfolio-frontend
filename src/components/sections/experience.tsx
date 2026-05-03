@@ -49,9 +49,6 @@ export function ExperienceSection() {
                       {exp.company}
                     </p>
                   </div>
-                  <p className="text-xs font-medium text-muted-foreground/60 uppercase tracking-wider">
-                    {exp.period}
-                  </p>
                 </div>
 
                 {/* Impact bullets */}
@@ -77,10 +74,6 @@ export function ExperienceSection() {
                       {tech}
                     </span>
                   ))}
-                  <button className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary transition-all hover:bg-primary hover:text-primary-foreground">
-                    <MessageSquare size={12} />
-                    Ask AI
-                  </button>
                 </div>
               </div>
             </motion.div>

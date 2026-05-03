@@ -52,6 +52,7 @@ export interface ValueCard {
 export interface Stat {
   label: string;
   value: string;
+  description?: string;
 }
 
 // ─── Nav link ───────────────────────────────────────────────
