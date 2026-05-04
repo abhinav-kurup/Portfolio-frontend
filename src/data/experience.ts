@@ -16,12 +16,12 @@ export const experiences: Experience[] = [
     company: "BlueSkript",
     period: "July 2025 – Jan 2026",
     impact:
-      "Built and shipped backend systems for cloud-based operational platforms used in live business environments, with ownership across backend architecture, core service design, and production delivery. Designed scalable backend workflows, asynchronous processing pipelines, and deployment infrastructure to support reliable operations at scale.",
+      "Built and owned the backend for a live, cloud-based business platform — from architecture and core service design to production deployment. This included scalable Django APIs, an asynchronous messaging pipeline on AWS processing thousands of messages daily, and containerized deployment on ECS.",
     stack: ["Django", "AWS Lambda", "SQS", "ECS", "PostgreSQL"],
   },
   {
     id: "exp-3",
-    role: "Lead Backend Developer",
+    role: "Backend Developer",
     company: "Goa Police",
     period: "July 2023 – Dec 2023",
     impact:

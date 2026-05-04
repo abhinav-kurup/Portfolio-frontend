@@ -31,7 +31,7 @@ export function WritingSection() {
             <motion.a
               key={post.id}
               variants={fadeIn}
-              href={`/blog/${post.slug}`}
+              href={`/writing/${post.slug}`}
               className="group flex flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
             >
               {/* Tags */}

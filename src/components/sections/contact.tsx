@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Send, Mail, Link, Code, FileText, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, Mail, Link, Code, FileText, Phone, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig, socialLinks } from "@/data/site";
 import { fadeIn, staggerContainer } from "@/lib/motion";
@@ -14,10 +14,46 @@ export function ContactSection() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"success" | "error" | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Wire up to backend or email service
-    console.log("Contact form submitted:", formData);
+    setIsSubmitting(true);
+    setStatus(null);
+    setErrorMessage("");
+
+    try {
+      // Get base URL from env or default to local
+      let baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/chat\/?$/, "") || "http://127.0.0.1:8000/api";
+      
+      const response = await fetch(`${baseUrl}/contact/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setStatus(null), 5000);
+    } catch (err: any) {
+      console.error("Contact submission error:", err);
+      setStatus("error");
+      setErrorMessage(err.message || "Failed to send message. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,10 +145,48 @@ export function ContactSection() {
                 placeholder="Tell me about your project..."
               />
             </div>
-            <Button type="submit" size="lg" className="h-12 w-full rounded-xl sm:w-auto px-8">
-              <Send size={16} className="mr-2" />
-              Send Message
-            </Button>
+            <div className="flex flex-col gap-4">
+              <Button 
+                type="submit" 
+                size="lg" 
+                className="h-12 w-full rounded-xl sm:w-auto px-8 transition-all active:scale-[0.98]"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <Loader2 size={16} className="mr-2 animate-spin" />
+                ) : (
+                  <Send size={16} className="mr-2" />
+                )}
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
+
+              {/* Status Messages */}
+              <AnimatePresence mode="wait">
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2 rounded-xl bg-emerald-500/10 p-4 text-sm font-medium text-emerald-500 border border-emerald-500/20"
+                  >
+                    <CheckCircle2 size={18} />
+                    Thanks for reaching out! I&apos;ll get back to you soon.
+                  </motion.div>
+                )}
+
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2 rounded-xl bg-destructive/10 p-4 text-sm font-medium text-destructive border border-destructive/20"
+                  >
+                    <AlertCircle size={18} />
+                    {errorMessage}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.form>
 
           {/* Quick links */}

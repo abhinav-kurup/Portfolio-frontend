@@ -39,7 +39,7 @@ export function HeroSection() {
             <span className="text-blue-500">$</span>
             <span className="text-muted-foreground/60">currently_building</span>
             <span className="text-primary/40">→</span>
-            <span className="text-blue-400/80">ai_chat_backend</span>
+            <span className="text-blue-400/80">ai_integrated_backend</span>
           </div>
         </motion.div>
 
@@ -110,8 +110,8 @@ export function HeroSection() {
           variants={fadeInDelay(0.3)}
           className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-stretch"
         >
-          <a 
-            href="#projects" 
+          <a
+            href="#projects"
             className={cn(
               buttonVariants({ size: "lg" }),
               "group/btn w-full sm:w-[210px] h-auto py-3.5 rounded-xl px-6 text-sm font-semibold shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"

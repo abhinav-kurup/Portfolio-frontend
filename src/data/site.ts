@@ -19,7 +19,7 @@ export const navLinks: NavLink[] = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Writing", href: "#writing" },
+  // { label: "Writing", href: "#writing" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -61,7 +61,7 @@ export const stats: Stat[] = [
   { label: "Requests Handled", value: "1000+" },
   {
     label: "AVG RESPONSE TIME",
-    value: "42ms",
+    value: "200ms",
     description: "(emotionally unavailable, technically fast)",
   },
 ];
