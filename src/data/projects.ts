@@ -29,6 +29,18 @@ export const projects: Project[] = [
   },
   {
     id: "proj-3",
+    title: "QR Security Scanner",
+    impact: "AI-powered protection against QR Phishing (Quishing)",
+    description:
+      "An end-to-end security portal that decodes QR codes, performs reputation checks via VirusTotal, and generates plain-English safety reports with Google Gemini. Features a scalable audit trail with Apache Cassandra.",
+    stack: ["Python", "Streamlit", "Cassandra", "Gemini AI", "VirusTotal", "Docker"],
+    category: "Security",
+    links: {
+      github: "https://github.com/abhinav-kurup/QR-Security-Scanner",
+    },
+  },
+  {
+    id: "proj-4",
     title: "EMS Backend",
     impact: "Automated HR workflows saving 20+ hours/week in admin tasks",
     description:
@@ -40,7 +52,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "proj-4",
+    id: "proj-5",
     title: "Portfolio Website",
     impact: "FastAPI-powered portfolio with integrated RAG agent",
     description:
@@ -52,7 +64,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "proj-5",
+    id: "proj-6",
     title: "Django ECS Cluster",
     impact: "ECS + EC2 Cluster for Django Application",
     description:
@@ -62,7 +74,7 @@ export const projects: Project[] = [
     links: {},
   },
   {
-    id: "proj-6",
+    id: "proj-7",
     title: "MediAssist AI",
     impact: "AI-POWERED SYMPTOM ANALYSIS SYSTEM",
     description:

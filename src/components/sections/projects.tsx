@@ -1,19 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Code, ArrowRight, MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 import { fadeIn, staggerContainer } from "@/lib/motion";
 
 import { projects, projectCategories } from "@/data/projects";
 
 export function ProjectsSection() {
 	const [activeCategory, setActiveCategory] = useState("All");
+	const sliderRef = useRef<HTMLDivElement>(null);
 
 	const filtered =
 		activeCategory === "All"
 			? projects
 			: projects.filter((p) => p.category === activeCategory);
+
+	useEffect(() => {
+		sliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+	}, [activeCategory]);
 
 	return (
 		<section id="projects" className="section-padding relative overflow-hidden">
@@ -53,8 +58,8 @@ export function ProjectsSection() {
 							key={cat}
 							onClick={() => setActiveCategory(cat)}
 							className={`shrink-0 rounded-full border px-5 py-1.5 text-sm font-medium transition-all ${activeCategory === cat
-									? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-									: "border-border/60 text-muted-foreground hover:border-border hover:text-foreground hover:bg-muted/30"
+								? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+								: "border-border/60 text-muted-foreground hover:border-border hover:text-foreground hover:bg-muted/30"
 								}`}
 						>
 							{cat}
@@ -63,11 +68,16 @@ export function ProjectsSection() {
 				</motion.div>
 
 				{/* Project cards slider */}
-				<div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none">
-					{filtered.map((project) => (
+				<div
+					ref={sliderRef}
+					className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none"
+				>
+					{filtered.map((project, i) => (
 						<motion.div
 							key={project.id}
-							variants={fadeIn}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.08 }}
 							className="group flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] snap-start flex-col rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
 						>
 							{/* Title */}
