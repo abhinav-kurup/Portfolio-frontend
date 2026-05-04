@@ -132,4 +132,27 @@ export const blogPosts: BlogPost[] = [
     slug: "event-driven-architecture-celery",
     publishedAt: "2026-02-10",
   },
+  {
+    id: "post-4",
+    title: "Scaling WhatsApp Notifications with Celery and Twilio",
+    excerpt:
+      "Implementing a resilient broadcasting system for enterprise event management using Django and background workers.",
+    content: `
+      <p>Notifications are easy until they're not.</p>
+      <p>Sending one WhatsApp message is a simple API call. Sending 1,000 messages for an enterprise event while ensuring delivery, handling rate limits, and keeping your API responsive? That's an engineering challenge.</p>
+      <p>In my recent work on the Employee Management System (EMS), I had to build a broadcasting layer that could handle instant event alerts for thousands of employees.</p>
+      <p>The architecture relies on three pillars:</p>
+      <ul>
+        <li><strong>Django Signals:</strong> To trigger notification workflows whenever a new event is created or updated.</li>
+        <li><strong>Celery Task Queue:</strong> To offload the heavy lifting. We don't want the event creation request to hang while waiting for the Twilio API.</li>
+        <li><strong>Twilio WhatsApp API:</strong> The delivery mechanism.</li>
+      </ul>
+      <p>One critical lesson: <strong>Batching is your friend, but retries are your lifesaver.</strong> We implemented exponential backoff for failed deliveries to handle intermittent network issues without overloading the API.</p>
+      <p>The result is a system that feels instantaneous to the admin, while the background workers quietly handle the orchestration of thousands of messages.</p>
+    `,
+    tags: ["Twilio", "Django", "Celery", "WhatsApp"],
+    readingTime: "5 min read",
+    slug: "scaling-whatsapp-notifications-celery",
+    publishedAt: "2026-05-01",
+  },
 ];

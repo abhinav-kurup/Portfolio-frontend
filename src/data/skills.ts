@@ -10,10 +10,11 @@ export const skills: Skill[] = [
   // Frameworks
   { name: "FastAPI", category: "Frameworks", inProduction: true },
   { name: "Django", category: "Frameworks", inProduction: true },
-  { name: "Flask", category: "Frameworks", inProduction: true },
-  { name: "LangChain", category: "Frameworks", inProduction: true },
-  { name: "LangGraph", category: "Frameworks", inProduction: true },
+  { name: "Flask", category: "Frameworks", inProduction: false },
   { name: "Celery", category: "Frameworks", inProduction: true },
+  { name: "LangChain", category: "Frameworks", inProduction: false },
+  { name: "LangGraph", category: "Frameworks", inProduction: false },
+
 
   // Databases & Storage
   { name: "PostgreSQL", category: "Databases", inProduction: true },
@@ -29,6 +30,7 @@ export const skills: Skill[] = [
   { name: "Jenkins", category: "DevOps", inProduction: false },
   { name: "Linux", category: "DevOps", inProduction: true },
   { name: "Nginx", category: "DevOps", inProduction: true },
+  { name: "Gunicorn", category: "DevOps", inProduction: true },
 
   // Cloud
   { name: "AWS", category: "Cloud", inProduction: true },

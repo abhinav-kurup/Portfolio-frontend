@@ -19,7 +19,7 @@ export const projects: Project[] = [
     title: "CollabWrite",
     impact: "Real-time collaborative editor supporting 50+ concurrent users",
     description:
-      "A Google Docs-style collaborative writing platform with operational transform, WebSocket sync, and rich text editing.",
+      "A collaborative writing platform with CRDT-based conflict resolution, WebSocket sync, and rich text editing for Google Docs-style multi-user collaboration.",
     stack: ["Python", "FastAPI", "WebSockets", "PostgreSQL", "Redis"],
     category: "Backend",
     links: {
@@ -34,23 +34,23 @@ export const projects: Project[] = [
     description:
       "An end-to-end security portal that decodes QR codes, performs reputation checks via VirusTotal, and generates plain-English safety reports with Google Gemini. Features a scalable audit trail with Apache Cassandra.",
     stack: ["Python", "Streamlit", "Cassandra", "Gemini AI", "VirusTotal", "Docker"],
-    category: "Security",
+    category: "AI",
     links: {
       github: "https://github.com/abhinav-kurup/QR-Security-Scanner",
     },
   },
-  {
-    id: "proj-4",
-    title: "EMS Backend",
-    impact: "Automated HR workflows saving 20+ hours/week in admin tasks",
-    description:
-      "Enterprise employee management system with Celery task queues, automated reporting, and role-based access control.",
-    stack: ["Python", "Django", "Celery", "PostgreSQL", "Docker"],
-    category: "Backend",
-    links: {
-      deepDive: "/projects/ems-backend",
-    },
-  },
+  // {
+  //   id: "proj-4",
+  //   title: "EMS Backend",
+  //   impact: "Unified HR and event orchestration saving 25+ hours/week with automated notifications",
+  //   description:
+  //     "Enterprise employee management system featuring unified employee and event management, Celery-driven task queues for automated reporting, RBAC, and WhatsApp broadcasting for instant event notifications.",
+  //   stack: ["Python", "Django", "Celery", "PostgreSQL", "Twilio", "Docker"],
+  //   category: "Backend",
+  //   links: {
+  //     deepDive: "/projects/ems-backend",
+  //   },
+  // },
   {
     id: "proj-5",
     title: "Portfolio Website",

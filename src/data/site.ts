@@ -58,7 +58,7 @@ export const valueCards: ValueCard[] = [
 export const stats: Stat[] = [
   { label: "Projects Shipped", value: "3" },
   { label: "Backend Systems", value: "15+" },
-  { label: "Requests Handled", value: "1000+" },
+  { label: "GitHub Commits", value: "400+" },
   {
     label: "AVG RESPONSE TIME",
     value: "200ms",

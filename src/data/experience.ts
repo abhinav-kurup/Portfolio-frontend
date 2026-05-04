@@ -17,7 +17,7 @@ export const experiences: Experience[] = [
     period: "July 2025 – Jan 2026",
     impact:
       "Built and owned the backend for a live, cloud-based business platform — from architecture and core service design to production deployment. This included scalable Django APIs, an asynchronous messaging pipeline on AWS processing thousands of messages daily, and containerized deployment on ECS.",
-    stack: ["Django", "AWS Lambda", "SQS", "ECS", "PostgreSQL"],
+    stack: ["Django", "AWS", "SQS", "ECS", "PostgreSQL", "Redis",],
   },
   {
     id: "exp-3",
@@ -26,6 +26,6 @@ export const experiences: Experience[] = [
     period: "July 2023 – Dec 2023",
     impact:
       "Led the backend development of a cloud-based operational platform for large-scale field coordination and workflow management. Built backend systems supporting geospatial workflows, reporting, and real-time operational visibility in live field environments.",
-    stack: ["Python", "Django", "PostgreSQL", "PostGIS", "GeoServer"],
+    stack: ["Python", "Django", "PostgreSQL", "PostGIS", "GeoServer", "Firebase"],
   },
 ];
