@@ -83,6 +83,18 @@ export function HeroSection() {
             {/* Rotating Ring */}
             <div className="absolute -inset-4 animate-[spin_8s_linear_infinite] rounded-full border-2 border-transparent border-t-primary/30 border-r-primary/10" />
 
+            {/* AWS Certified Pill Badge */}
+            <a href="#certifications" className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-30 w-max cursor-pointer">
+              <div className="flex items-center gap-2 rounded-full border border-orange-500/50 bg-[#0a0a0a]/90 px-3 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(255,153,0,0.2)] transition-all hover:border-orange-500 hover:shadow-[0_0_25px_rgba(255,153,0,0.3)]">
+                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] text-black">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-2.5 w-2.5">
+                    <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" />
+                  </svg>
+                </div>
+                <span className="text-[10px] font-bold tracking-wider text-orange-500">aws_certified</span>
+              </div>
+            </a>
+
             <div className="relative h-48 w-48 overflow-hidden rounded-full border-4 border-background bg-muted shadow-2xl sm:h-56 sm:w-56 md:h-72 md:w-72 lg:h-80 lg:w-80">
               <Image
                 src={siteConfig.avatarUrl}
@@ -95,7 +107,7 @@ export function HeroSection() {
             </div>
 
             {/* Experience Badge */}
-            <div className="absolute -right-2 bottom-6 md:right-4 md:bottom-10">
+            <div className="absolute -right-8 top-1/2 -translate-y-1/2 md:-right-12">
               <div className="flex items-center gap-2 rounded-xl border border-primary/20 bg-background/90 px-4 py-2 font-mono text-xs backdrop-blur-md shadow-xl">
                 <span className="text-primary/40">{"{"}</span>
                 <span className="text-primary font-bold">2yrs exp</span>

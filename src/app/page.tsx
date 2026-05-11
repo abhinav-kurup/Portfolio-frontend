@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { SkillsSection } from "@/components/sections/skills";
+import { CertificationsSection } from "@/components/sections/certifications";
 import { ExperienceSection } from "@/components/sections/experience";
 import { ProjectsSection } from "@/components/sections/projects";
 import { WritingSection } from "@/components/sections/writing";
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
+      <CertificationsSection />
       <ExperienceSection />
       <ProjectsSection />
       {/* <WritingSection /> */}
