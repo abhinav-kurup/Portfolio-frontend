@@ -20,6 +20,11 @@ export function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Wake up the backend on load
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/chat/";
+    const baseUrl = apiUrl.split("/api")[0];
+    fetch(`${baseUrl}/health`).catch((err) => console.log("Backend health check failed:", err));
+
     const handleToggle = () => setIsOpen((prev) => !prev);
     const handleOpen = () => setIsOpen(true);
 
@@ -46,12 +51,17 @@ export function ChatWidget() {
     setInput("");
     setIsLoading(true);
 
+    const chatHistory = messages.slice(-5);
+
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/chat/";
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ 
+          message: input,
+          history: chatHistory
+        }),
       });
 
       const data = await response.json();

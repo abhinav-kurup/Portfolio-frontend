@@ -6,8 +6,8 @@ export const siteConfig = {
   role: "Backend Engineer",
   tagline: "I build robust, scalable backend systems that power real products.",
   description:
-    "Backend-focused engineer specializing in Python, FastAPI, and distributed systems. I design APIs, architect data pipelines, and ship production-grade infrastructure.",
-  email: "abhinavkurup11@gmail.com",
+    "Backend-focused engineer specializing in Python, FastAPI, AI systems, APIs, automation workflows, and shipping production-grade backend infrastructure.",
+  email: "abhinavkurup00@gmail.com",
   phone: "+91 9404504260",
   resumeUrl: "/resume.pdf",
   avatarUrl: "/remove1.png",
