@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, X, Bot, User, Loader2, MessageSquare } from "lucide-react";
+import { Send, X, Bot, User, Loader2, MessageSquare, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Message {
@@ -12,6 +12,7 @@ interface Message {
 
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hi! I'm Abhinav's AI assistant. Ask me anything about his experience or projects." }
@@ -118,11 +119,22 @@ export function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-[90vw] max-w-[400px] overflow-hidden rounded-2xl border border-border/50 bg-background/95 shadow-2xl backdrop-blur-xl sm:w-[400px]"
+            className={`fixed bottom-24 right-6 z-50 overflow-hidden rounded-2xl border border-border/50 bg-background/95 shadow-2xl backdrop-blur-xl transition-all duration-300 ${
+              isExpanded 
+                ? "w-[95vw] max-w-[800px] sm:w-[800px]" 
+                : "w-[90vw] max-w-[400px] sm:w-[400px]"
+            }`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-border/50 bg-primary/5 px-6 py-4">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between border-b border-border/50 bg-primary/5 px-4 py-4 sm:px-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="rounded-lg p-2 bg-primary/10 text-primary hover:bg-primary/20 transition-colors mr-1"
+                  title={isExpanded ? "Shrink chat" : "Expand chat"}
+                >
+                  {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                </button>
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Bot size={20} />
                 </div>
@@ -145,7 +157,9 @@ export function ChatWidget() {
             {/* Messages */}
             <div
               ref={scrollRef}
-              className="h-[400px] overflow-y-auto px-6 py-6 scroll-smooth"
+              className={`overflow-y-auto px-6 py-6 scroll-smooth transition-all duration-300 ${
+                isExpanded ? "h-[600px] sm:h-[60vh]" : "h-[400px]"
+              }`}
             >
               <div className="flex flex-col gap-6">
                 {messages.map((msg, i) => (

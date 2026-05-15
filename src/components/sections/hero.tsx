@@ -126,7 +126,7 @@ export function HeroSection() {
             href="#projects"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "group/btn w-full sm:w-[210px] h-auto py-3.5 rounded-xl px-6 text-sm font-semibold shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              "group/btn w-full sm:w-[240px] h-auto py-4 rounded-xl px-8 text-base font-semibold shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
             )}
           >
             View Projects
