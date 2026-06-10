@@ -10,6 +10,85 @@ interface Message {
   content: string;
 }
 
+function formatMessage(content: string) {
+  // Normalize inline numbered items and bullets to newlines to process them as lists
+  let formatted = content.replace(/\s+(\d+\.\s+)/g, "\n$1");
+  formatted = formatted.replace(/\s+([•\-\*]\s+)/g, "\n$1");
+
+  const lines = formatted.split("\n");
+  const elements: React.ReactNode[] = [];
+  let currentList: { type: "ol" | "ul"; items: React.ReactNode[] } | null = null;
+
+  const flushList = (key: number) => {
+    if (currentList) {
+      if (currentList.type === "ol") {
+        elements.push(
+          <ol key={`list-${key}`} className="list-decimal pl-5 my-1.5 space-y-1">
+            {currentList.items}
+          </ol>
+        );
+      } else {
+        elements.push(
+          <ul key={`list-${key}`} className="list-disc pl-5 my-1.5 space-y-1">
+            {currentList.items}
+          </ul>
+        );
+      }
+      currentList = null;
+    }
+  };
+
+  lines.forEach((line, index) => {
+    const trimmed = line.trim();
+    if (!trimmed) return;
+
+    // Numbered list item (e.g. "1. Item")
+    const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+    if (numMatch) {
+      if (currentList && currentList.type !== "ol") {
+        flushList(index);
+      }
+      if (!currentList) {
+        currentList = { type: "ol", items: [] };
+      }
+      currentList.items.push(
+        <li key={`item-${index}`} className="leading-relaxed">
+          {numMatch[2]}
+        </li>
+      );
+      return;
+    }
+
+    // Bullet list item (e.g. "- Item" or "* Item" or "• Item")
+    const bulletMatch = trimmed.match(/^([\-\*•])\s+(.*)$/);
+    if (bulletMatch) {
+      if (currentList && currentList.type !== "ul") {
+        flushList(index);
+      }
+      if (!currentList) {
+        currentList = { type: "ul", items: [] };
+      }
+      currentList.items.push(
+        <li key={`item-${index}`} className="leading-relaxed">
+          {bulletMatch[2]}
+        </li>
+      );
+      return;
+    }
+
+    // Standard text line
+    flushList(index);
+    elements.push(
+      <p key={`p-${index}`} className="my-1.5 first:mt-0 last:mb-0 leading-relaxed">
+        {trimmed}
+      </p>
+    );
+  });
+
+  flushList(lines.length);
+  return elements;
+}
+
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -181,7 +260,7 @@ export function ChatWidget() {
                             : "bg-muted/50 text-foreground rounded-tl-none border border-border/20"
                           }`}
                       >
-                        {msg.content}
+                        {formatMessage(msg.content)}
                       </div>
                     </div>
                   </div>
