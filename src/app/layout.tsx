@@ -3,7 +3,9 @@ import { Inter, Outfit } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ChatWidget } from "@/components/chat-widget";
+import { CursorFollower } from "@/components/cursor-follower";
 import "./globals.css";
+
 
 const inter = Inter({
   variable: "--font-sans",
@@ -49,6 +51,7 @@ export default function RootLayout({
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
         <ChatWidget />
+        <CursorFollower />
       </body>
     </html>
   );

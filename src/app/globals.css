@@ -129,8 +129,15 @@
   body {
     @apply bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
     background-image: 
-      radial-gradient(circle at 0% 0%, oklch(0.15 0.05 250 / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 100% 100%, oklch(0.15 0.05 250 / 0.1) 0%, transparent 50%);
+      /* Ambient glows using primary color at low opacity */
+      radial-gradient(circle at 15% 20%, oklch(0.75 0.15 250 / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 85% 80%, oklch(0.75 0.15 250 / 0.05) 0%, transparent 50%),
+      /* Faint tech grid lines */
+      linear-gradient(to right, oklch(0.75 0.15 250 / 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.75 0.15 250 / 0.02) 1px, transparent 1px),
+      /* Faint dot matrix aligned with the grid */
+      radial-gradient(oklch(0.75 0.15 250 / 0.06) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px, 24px 24px;
     background-attachment: fixed;
   }
   html {
