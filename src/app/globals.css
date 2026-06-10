@@ -160,3 +160,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.4 0 0);
 }
+
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-none {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}

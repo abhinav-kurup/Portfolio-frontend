@@ -10,15 +10,60 @@ import { projects, projectCategories } from "@/data/projects";
 export function ProjectsSection() {
 	const [activeCategory, setActiveCategory] = useState("All");
 	const sliderRef = useRef<HTMLDivElement>(null);
+	const [isHovered, setIsHovered] = useState(false);
 
 	const filtered =
 		activeCategory === "All"
 			? projects
 			: projects.filter((p) => p.category === activeCategory);
 
+	// Duplicate list to support seamless infinite scrolling loop
+	const duplicated = [...filtered, ...filtered];
+
 	useEffect(() => {
-		sliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+		if (sliderRef.current) {
+			sliderRef.current.scrollLeft = 0;
+		}
 	}, [activeCategory]);
+
+	useEffect(() => {
+		const slider = sliderRef.current;
+		if (!slider) return;
+
+		let animationFrameId: number;
+		let lastTime = performance.now();
+		const speed = 35; // Pixels per second
+
+		const step = (time: number) => {
+			const deltaTime = (time - lastTime) / 1000;
+			lastTime = time;
+
+			if (!isHovered && slider.children.length > filtered.length) {
+				const firstDup = slider.children[filtered.length] as HTMLElement;
+				const firstOrig = slider.children[0] as HTMLElement;
+				if (firstDup && firstOrig) {
+					const resetDistance = firstDup.offsetLeft - firstOrig.offsetLeft;
+					if (resetDistance > slider.clientWidth) {
+						let currentScroll = slider.scrollLeft;
+						if (currentScroll >= resetDistance) {
+							currentScroll = currentScroll - resetDistance;
+						} else if (currentScroll < 0) {
+							currentScroll = 0;
+						}
+						slider.scrollLeft = currentScroll + speed * deltaTime;
+					}
+				}
+			}
+
+			animationFrameId = requestAnimationFrame(step);
+		};
+
+		animationFrameId = requestAnimationFrame(step);
+
+		return () => {
+			cancelAnimationFrame(animationFrameId);
+		};
+	}, [isHovered, filtered.length]);
 
 	return (
 		<section id="projects" className="section-padding relative overflow-hidden">
@@ -70,15 +115,19 @@ export function ProjectsSection() {
 				{/* Project cards slider */}
 				<div
 					ref={sliderRef}
-					className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-none"
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
+					onTouchStart={() => setIsHovered(true)}
+					onTouchEnd={() => setIsHovered(false)}
+					className="relative flex overflow-x-auto gap-6 pb-8 scrollbar-none"
 				>
-					{filtered.map((project, i) => (
+					{duplicated.map((project, i) => (
 						<motion.div
-							key={project.id}
+							key={`${project.id}-${i}`}
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.08 }}
-							className="group flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] snap-start flex-col rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+							transition={{ duration: 0.4, ease: "easeOut", delay: (i % filtered.length) * 0.08 }}
+							className="group flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] flex-col rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
 						>
 							{/* Title */}
 							<h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">

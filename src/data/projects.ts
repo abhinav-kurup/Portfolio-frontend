@@ -4,10 +4,10 @@ export const projects: Project[] = [
   {
     id: "proj-1",
     title: "DocuMind",
-    impact: "RAG-powered document intelligence with 95% retrieval accuracy",
+    impact: "RAG-powered document intelligence with 98% retrieval accuracy",
     description:
-      "A production RAG system using LangGraph, ChromaDB, and FastAPI for intelligent document Q&A with streaming responses.",
-    stack: ["Python", "FastAPI", "LangGraph", "ChromaDB", "Streamlit", "Groq"],
+      "A production RAG system using LangGraph, Whisper, FastAPI and ChromaDB for intelligent document Q&A with streaming responses.",
+    stack: ["Python", "FastAPI", "LangGraph", "Whisper", "Streamlit", "Groq", "ChromaDB",],
     category: "AI",
     links: {
       github: "https://github.com/abhinav-kurup/Documind",
@@ -20,14 +20,14 @@ export const projects: Project[] = [
     impact: "Real-time collaborative editor supporting 50+ concurrent users",
     description:
       "A collaborative writing platform with CRDT-based conflict resolution, WebSocket sync, and rich text editing for Google Docs-style multi-user collaboration.",
-    stack: ["Python", "FastAPI", "Async","WebSockets", "PostgreSQL", "Redis"],
+    stack: ["Python", "FastAPI", "Async", "WebSockets", "PostgreSQL", "Redis"],
     category: "Backend",
     links: {
       github: "https://github.com/abhinav-kurup/CollabWrite",
       deepDive: "/projects/collabwrite",
     },
   },
-      {
+  {
     id: "proj-8",
     title: "MCP Financial Analyst",
     impact: "Agentic financial analysis via LangGraph and dynamic MCP servers",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     impact: "FastAPI-powered portfolio with integrated RAG agent",
     description:
       "A robust backend AI service built with FastAPI providing real-time, context-aware chatbot inference, retrieval-augmented pipelines, streaming responses, and scalable vector storage for document context. The frontend is a static Next.js 15 site.",
-    stack: ["FastAPI", "Python","Gemini","SQLlite", "Next.js", "TypeScript"],
+    stack: ["FastAPI", "Python", "Gemini", "SQLlite", "Next.js", "TypeScript"],
     category: "Backend",
     links: {
       github: "https://github.com/abhinav-kurup/Portfolio-backend",
