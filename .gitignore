@@ -46,3 +46,9 @@ AGENTS.md
 prd.md
 blog.md
 .jetro/
+.agents/
+.cursor/
+.github/
+.mcp.json
+.windsurfrules
+AGENT.md

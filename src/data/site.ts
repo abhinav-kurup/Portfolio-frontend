@@ -8,7 +8,7 @@ export const siteConfig = {
   description:
     "Backend-focused engineer specializing in Python, FastAPI, AI systems, APIs, automation workflows, and shipping production-grade backend infrastructure.",
   email: "abhinavkurup00@gmail.com",
-  phone: "+91 9404504260",
+  phone: "+91 XXXXX XXXXX",
   resumeUrl: "/resume.pdf",
   avatarUrl: "/remove1.png",
 };

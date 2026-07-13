@@ -140,31 +140,89 @@ export function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           message: input,
-          history: chatHistory
+          history: chatHistory,
+          stream: true,
         }),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-      if (data.response) {
-        // Simulate streaming/typing effect
-        const fullResponse = data.response;
-        let currentText = "";
-        const assistantMessage: Message = { role: "assistant", content: "" };
-        setMessages((prev) => [...prev, assistantMessage]);
+      if (!response.body) {
+        throw new Error("No response body to read stream");
+      }
 
-        const words = fullResponse.split(" ");
-        for (let i = 0; i < words.length; i++) {
-          currentText += (i === 0 ? "" : " ") + words[i];
-          setMessages((prev) => {
-            const newMessages = [...prev];
-            newMessages[newMessages.length - 1] = { role: "assistant", content: currentText };
-            return newMessages;
-          });
-          await new開心(10 + Math.random() * 20); // Delay for typing feel
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      
+      const assistantMessage: Message = { role: "assistant", content: "" };
+      setMessages((prev) => [...prev, assistantMessage]);
+
+      let accumulatedContent = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data: ")) continue;
+
+          try {
+            const jsonStr = trimmed.slice(6);
+            const event = JSON.parse(jsonStr);
+
+            if (event.type === "content" && event.delta) {
+              accumulatedContent += event.delta;
+              setMessages((prev) => {
+                const newMessages = [...prev];
+                if (newMessages.length > 0 && newMessages[newMessages.length - 1].role === "assistant") {
+                  newMessages[newMessages.length - 1] = {
+                    ...newMessages[newMessages.length - 1],
+                    content: accumulatedContent,
+                  };
+                }
+                return newMessages;
+              });
+            }
+          } catch (e) {
+            console.error("Error parsing stream chunk:", e, trimmed);
+          }
         }
       }
+
+      // Handle any remaining content in the buffer
+      if (buffer.trim().startsWith("data: ")) {
+        try {
+          const jsonStr = buffer.trim().slice(6);
+          const event = JSON.parse(jsonStr);
+          if (event.type === "content" && event.delta) {
+            accumulatedContent += event.delta;
+            setMessages((prev) => {
+              const newMessages = [...prev];
+              if (newMessages.length > 0 && newMessages[newMessages.length - 1].role === "assistant") {
+                newMessages[newMessages.length - 1] = {
+                  ...newMessages[newMessages.length - 1],
+                  content: accumulatedContent,
+                };
+              }
+              return newMessages;
+            });
+          }
+        } catch (e) {
+          console.error("Error parsing final stream chunk:", e, buffer);
+        }
+      }
+
     } catch (error) {
+      console.error("Error during stream chat:", error);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "Sorry, I'm having trouble connecting to the backend right now." }
@@ -173,11 +231,6 @@ export function ChatWidget() {
       setIsLoading(false);
     }
   };
-
-  // Helper for delay
-  function new開心(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 
   return (
     <>
