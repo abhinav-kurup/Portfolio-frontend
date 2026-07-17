@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, Link, Code, FileText, Phone, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Send, Mail, Link, Code, FileText, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig, socialLinks } from "@/data/site";
 import { fadeIn, staggerContainer } from "@/lib/motion";
@@ -232,16 +232,6 @@ export function ContactSection() {
                 <p className="text-xs font-medium text-muted-foreground/70">linkedin.com/in/abhinav-kurup</p>
               </div>
             </a>
-
-            <div className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5">
-              <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <Phone size={20} />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-foreground">Phone</p>
-                <p className="text-xs font-medium text-muted-foreground/70">{siteConfig.phone}</p>
-              </div>
-            </div>
           </motion.div>
         </div>
       </motion.div>
