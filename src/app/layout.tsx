@@ -20,21 +20,26 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Abhinav | Backend Engineer",
+  title: "Abhinav | AI & Backend Engineer",
   description:
-    "Backend engineer specializing in Python, FastAPI, and distributed systems. Building robust, scalable backend systems that power real products.",
+    "AI & Backend engineer specializing in Python, FastAPI, LLM orchestration, production RAG pipelines, and distributed systems.",
   keywords: [
+    "AI Engineer",
     "Backend Engineer",
     "Python",
     "FastAPI",
+    "LangChain",
+    "LangGraph",
+    "LLM Orchestration",
+    "RAG Systems",
     "Portfolio",
     "Software Engineer",
   ],
   authors: [{ name: "Abhinav" }],
   openGraph: {
-    title: "Abhinav | Backend Engineer",
+    title: "Abhinav | AI & Backend Engineer",
     description:
-      "Backend engineer specializing in Python, FastAPI, and distributed systems.",
+      "AI & Backend engineer specializing in Python, FastAPI, distributed systems, and production RAG pipelines.",
     type: "website",
   },
 };

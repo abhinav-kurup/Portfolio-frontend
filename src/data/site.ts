@@ -3,10 +3,10 @@ import type { NavLink, SocialLink, Stat, ValueCard } from "@/lib/types";
 // ─── Personal info ──────────────────────────────────────────
 export const siteConfig = {
   name: "Abhinav",
-  role: "Backend Engineer",
-  tagline: "I build robust, scalable backend systems that power real products.",
+  role: "AI & Backend Engineer",
+  tagline: "I build intelligent AI systems and robust, scalable backend infrastructure.",
   description:
-    "Backend-focused engineer specializing in Python, FastAPI, AI systems, APIs, automation workflows, and shipping production-grade backend infrastructure.",
+    "AI & Backend Engineer specializing in Python, FastAPI, LLM orchestration, production RAG pipelines, APIs, and scalable backend infrastructure.",
   email: "abhinavkurup00@gmail.com",
   phone: "+91 XXXXX XXXXX",
   resumeUrl: "/resume.pdf",
