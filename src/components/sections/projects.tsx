@@ -89,7 +89,7 @@ export function ProjectsSection() {
 					</h2>
 					<p className="mt-4 max-w-2xl text-base text-muted-foreground/80">
 						A showcase of my work, featuring projects that demonstrate my skills
-						and expertise in backend engineering.
+						and expertise in AI engineering and backend systems.
 					</p>
 				</motion.div>
 

@@ -63,7 +63,7 @@ export function HeroSection() {
             >
               <span className="text-foreground">{siteConfig.role}</span>
               <div className="h-[2px] w-8 bg-primary/40" />
-              <span className="text-muted-foreground/60 font-normal">API Architect</span>
+              <span className="text-muted-foreground/60 font-normal">LLM & API Architect</span>
             </motion.div>
 
             {/* Value prop */}
@@ -71,7 +71,7 @@ export function HeroSection() {
               variants={fadeInDelay(0.2)}
               className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground/80"
             >
-              I build robust, scalable backend systems that power real products. Clean code. Real impact.
+              {siteConfig.tagline}
             </motion.p>
           </div>
 
