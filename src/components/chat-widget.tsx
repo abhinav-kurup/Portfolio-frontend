@@ -111,7 +111,13 @@ export function ChatWidget() {
     window.addEventListener("toggle-chat", handleToggle);
     window.addEventListener("open-chat", handleOpen);
 
+    // Auto-open chatbot with a 1.5s delay
+    const openTimer = setTimeout(() => {
+      setIsOpen(true);
+    }, 1500);
+
     return () => {
+      clearTimeout(openTimer);
       window.removeEventListener("toggle-chat", handleToggle);
       window.removeEventListener("open-chat", handleOpen);
     };
