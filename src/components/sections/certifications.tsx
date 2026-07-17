@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "@/lib/motion";
 import Image from "next/image";
 import { ExternalLink, ShieldCheck } from "lucide-react";
+import { TechCorners } from "@/components/tech-corners";
 
 const certifications = [
   {
@@ -35,8 +36,8 @@ export function CertificationsSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Certifications
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [03] Certifications
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             Professional Credentials
@@ -49,8 +50,9 @@ export function CertificationsSection() {
             <motion.div
               key={cert.title}
               variants={fadeIn}
-              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a] p-8 shadow-2xl transition-all hover:border-primary/20"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm transition-all hover:border-primary/30 hover:shadow-md"
             >
+              <TechCorners />
               {/* Subtle glow effect */}
               <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-[100px] transition-all group-hover:bg-primary/10" />
 

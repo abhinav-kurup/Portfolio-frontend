@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { siteConfig, stats } from "@/data/site";
 import { fadeIn, fadeInDelay, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 export function HeroSection() {
   return (
@@ -19,6 +20,14 @@ export function HeroSection() {
         <div className="absolute -top-[10%] -left-[10%] h-[40%] w-[40%] rounded-full bg-primary/10 blur-[120px]" />
       </div>
 
+      {/* Engineering Draft Annotation Block */}
+      <div className="absolute right-6 top-6 hidden font-mono text-[9px] leading-tight text-muted-foreground/45 md:flex flex-col items-end select-none border-l border-border/30 pl-4 py-1">
+        <span>SPEC: PRT_0x7F</span>
+        <span>SYS: PORTFOLIO_V2.0</span>
+        <span>LANG: TSX / TAILWIND</span>
+        <span>LOC: GOA_IN // 15.29°N 74.12°E</span>
+      </div>
+
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -28,18 +37,20 @@ export function HeroSection() {
 
         {/* Terminal Status Badges */}
         <motion.div variants={fadeIn} className="mb-10 flex flex-wrap items-center gap-4">
-          <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-primary/20 bg-[#0a0a0a] px-4 py-2 font-mono text-xs tracking-tight text-primary/90 shadow-2xl">
-            <span className="text-emerald-500">$</span>
+          <div className="relative group inline-flex w-fit items-center gap-3 rounded-lg border border-border bg-card px-4 py-2 font-mono text-xs tracking-tight text-foreground shadow-sm">
+            <TechCorners />
+            <span className="text-emerald-600 dark:text-emerald-400 font-bold">$</span>
             <span className="text-muted-foreground">status</span>
-            <span className="text-primary/40">→</span>
-            <span className="animate-pulse text-emerald-400">available_for_opportunities</span>
+            <span className="text-muted-foreground/45">→</span>
+            <span className="animate-pulse text-emerald-600 dark:text-emerald-400 font-medium">available_for_opportunities</span>
           </div>
 
-          <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-white/5 bg-[#0a0a0a] px-4 py-2 font-mono text-xs tracking-tight text-muted-foreground/80 shadow-2xl">
-            <span className="text-blue-500">$</span>
+          <div className="relative group inline-flex w-fit items-center gap-3 rounded-lg border border-border bg-card px-4 py-2 font-mono text-xs tracking-tight text-foreground shadow-sm">
+            <TechCorners />
+            <span className="text-primary font-bold">$</span>
             <span className="text-muted-foreground/60">currently_building</span>
-            <span className="text-primary/40">→</span>
-            <span className="text-blue-400/80">ai_integrated_backend</span>
+            <span className="text-muted-foreground/45">→</span>
+            <span className="text-primary font-medium">ai_integrated_backend</span>
           </div>
         </motion.div>
 
@@ -85,13 +96,13 @@ export function HeroSection() {
 
             {/* AWS Certified Pill Badge */}
             <a href="#certifications" className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-30 w-max cursor-pointer">
-              <div className="flex items-center gap-2 rounded-full border border-orange-500/50 bg-[#0a0a0a]/90 px-3 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(255,153,0,0.2)] transition-all hover:border-orange-500 hover:shadow-[0_0_25px_rgba(255,153,0,0.3)]">
-                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] text-black">
+              <div className="flex items-center gap-2 rounded-full border border-orange-500/30 bg-card/90 px-3 py-1.5 backdrop-blur-md shadow-sm transition-all hover:border-orange-500 hover:shadow-md">
+                <div className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[10px] text-white">
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-2.5 w-2.5">
                     <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" />
                   </svg>
                 </div>
-                <span className="text-[10px] font-bold tracking-wider text-orange-500">aws_certified</span>
+                <span className="text-[10px] font-bold tracking-wider text-orange-600 dark:text-orange-500">aws_certified</span>
               </div>
             </a>
 

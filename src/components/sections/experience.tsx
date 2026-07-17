@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Briefcase, MessageSquare } from "lucide-react";
 import { experiences } from "@/data/experience";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 export function ExperienceSection() {
   return (
@@ -17,8 +18,8 @@ export function ExperienceSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Experience
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [04] Experience
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             Where I&apos;ve worked
@@ -35,11 +36,12 @@ export function ExperienceSection() {
             >
               {/* Timeline dot */}
               <div className="absolute left-0 top-1.5 flex h-4 w-4 items-center justify-center rounded-full border-2 border-border bg-background md:h-5 md:w-5">
-                <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                <div className="h-1.5 w-1.5 rounded-full bg-primary" />
               </div>
 
               {/* Card */}
-              <div className="group rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5">
+              <div className="group relative rounded-xl border border-border bg-card/60 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md">
+                <TechCorners />
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">

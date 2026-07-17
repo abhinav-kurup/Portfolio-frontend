@@ -46,9 +46,9 @@ export function CursorFollower() {
 		>
 			{/* Multi-layered smudge glow for premium visual depth */}
 			{/* Outer soft glow */}
-			<div className="absolute inset-0 rounded-full bg-emerald-500/10 blur-[40px]" />
+			<div className="absolute inset-0 rounded-full bg-primary/5 blur-[40px]" />
 			{/* Inner core smudge */}
-			<div className="absolute top-1/4 left-1/4 h-1/2 w-1/2 rounded-full bg-green-400/20 blur-[20px]" />
+			<div className="absolute top-1/4 left-1/4 h-1/2 w-1/2 rounded-full bg-primary/10 blur-[20px]" />
 		</motion.div>
 	);
 }

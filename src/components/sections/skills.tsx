@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { skills, skillCategories } from "@/data/skills";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 export function SkillsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -24,8 +25,8 @@ export function SkillsSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Skills
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [02] Skills
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             Tech I work with
@@ -59,13 +60,14 @@ export function SkillsSection() {
           {filtered.map((skill) => (
             <div
               key={skill.name}
-              className="flex items-center justify-between rounded-lg border border-border/50 bg-card px-4 py-3 transition-colors hover:border-border hover:bg-muted/30"
+              className="relative group flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:border-primary/40 hover:bg-muted/30"
             >
+              <TechCorners />
               <span className="text-sm font-medium text-foreground">
                 {skill.name}
               </span>
               {skill.inProduction && (
-                <span className="ml-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" title="Used in production" />
+                <span className="ml-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" title="Used in production" />
               )}
             </div>
           ))}

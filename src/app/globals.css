@@ -54,38 +54,42 @@
 ────────────────────────────────────────────────────────────── */
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.99 0.005 250);
+  --foreground: oklch(0.12 0.005 250);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.12 0.005 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.12 0.005 250);
+  --primary: oklch(0.48 0.19 250); /* Blueprint Blue */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.12 0.005 250);
+  --muted: oklch(0.95 0.005 250);
+  --muted-foreground: oklch(0.45 0.01 250);
+  --accent: oklch(0.92 0.02 250);
+  --accent-foreground: oklch(0.48 0.19 250);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
+  --border: oklch(0.85 0.01 250); /* Sharp engineering grid line */
+  --input: oklch(0.85 0.01 250);
+  --ring: oklch(0.48 0.19 250);
+  --chart-1: oklch(0.48 0.19 250);
+  --chart-2: oklch(0.6 0.1 250);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.98 0.01 250);
+  --sidebar-foreground: oklch(0.12 0.005 250);
+  --sidebar-primary: oklch(0.48 0.19 250);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.92 0.02 250);
+  --sidebar-accent-foreground: oklch(0.48 0.19 250);
+  --sidebar-border: oklch(0.85 0.01 250);
+  --sidebar-ring: oklch(0.48 0.19 250);
+  --bg-glow-1: oklch(0.48 0.19 250 / 0.02);
+  --bg-glow-2: oklch(0.48 0.19 250 / 0.01);
+  --bg-grid-line: oklch(0.48 0.19 250 / 0.04); /* Light blue blueprint grid */
+  --bg-dot-matrix: oklch(0.48 0.19 250 / 0.07); /* Light blue dot matrix */
 }
 
 .dark {
@@ -120,6 +124,10 @@
   --sidebar-accent-foreground: oklch(0.93 0 0);
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.5 0 0);
+  --bg-glow-1: oklch(0.98 0 0 / 0.06);
+  --bg-glow-2: oklch(0.98 0 0 / 0.04);
+  --bg-grid-line: oklch(0.98 0 0 / 0.015);
+  --bg-dot-matrix: oklch(0.98 0 0 / 0.04);
 }
 
 @layer base {
@@ -129,14 +137,14 @@
   body {
     @apply bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
     background-image: 
-      /* Ambient glows using primary color at low opacity */
-      radial-gradient(circle at 15% 20%, oklch(0.75 0.15 250 / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 85% 80%, oklch(0.75 0.15 250 / 0.05) 0%, transparent 50%),
+      /* Ambient glows using dynamic variable */
+      radial-gradient(circle at 15% 20%, var(--bg-glow-1) 0%, transparent 50%),
+      radial-gradient(circle at 85% 80%, var(--bg-glow-2) 0%, transparent 50%),
       /* Faint tech grid lines */
-      linear-gradient(to right, oklch(0.75 0.15 250 / 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.75 0.15 250 / 0.02) 1px, transparent 1px),
+      linear-gradient(to right, var(--bg-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--bg-grid-line) 1px, transparent 1px),
       /* Faint dot matrix aligned with the grid */
-      radial-gradient(oklch(0.75 0.15 250 / 0.06) 1px, transparent 1px);
+      radial-gradient(var(--bg-dot-matrix) 1px, transparent 1px);
     background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px, 24px 24px;
     background-attachment: fixed;
   }

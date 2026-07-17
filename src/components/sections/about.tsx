@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Server, Network, Container, Brain } from "lucide-react";
 import { siteConfig, valueCards, stats } from "@/data/site";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 const iconMap: Record<string, React.ReactNode> = {
   Server: <Server size={20} />,
@@ -24,8 +25,8 @@ export function AboutSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            About
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [01] About
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             What I do
@@ -41,8 +42,9 @@ export function AboutSection() {
             <motion.div
               key={card.title}
               variants={fadeIn}
-              className="group rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+              className="group relative rounded-xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md"
             >
+              <TechCorners />
               <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 {iconMap[card.icon] ?? null}
               </div>

@@ -6,6 +6,7 @@ import { Send, Mail, Link, Code, FileText, Loader2, CheckCircle2, AlertCircle } 
 import { Button } from "@/components/ui/button";
 import { siteConfig, socialLinks } from "@/data/site";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -67,8 +68,8 @@ export function ContactSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Contact
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [07] Contact
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             Let&apos;s connect
@@ -191,7 +192,8 @@ export function ContactSection() {
 
           {/* Quick links */}
           <motion.div variants={fadeIn} className="space-y-4 lg:mt-[-190px]">
-            <div className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5">
+            <div className="group relative flex items-center gap-4 rounded-xl border border-border bg-card/60 p-5 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md">
+              <TechCorners />
               <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <Mail size={20} />
               </div>
@@ -207,8 +209,9 @@ export function ContactSection() {
               href="https://github.com/abhinav-kurup"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+              className="group relative flex items-center gap-4 rounded-xl border border-border bg-card/60 p-5 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md"
             >
+              <TechCorners />
               <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <Code size={20} />
               </div>
@@ -222,8 +225,9 @@ export function ContactSection() {
               href="https://linkedin.com/in/abhinav-kurup"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+              className="group relative flex items-center gap-4 rounded-xl border border-border bg-card/60 p-5 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md"
             >
+              <TechCorners />
               <div className="rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <Link size={20} />
               </div>

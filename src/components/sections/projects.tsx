@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Code } from "lucide-react";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 import { projects, projectCategories } from "@/data/projects";
 
@@ -81,8 +82,8 @@ export function ProjectsSection() {
 			>
 				{/* Section header */}
 				<motion.div variants={fadeIn} className="mb-12">
-					<p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-						Portfolio
+					<p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+						[05] Projects
 					</p>
 					<h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
 						Selected Work
@@ -127,8 +128,9 @@ export function ProjectsSection() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.4, ease: "easeOut", delay: (i % filtered.length) * 0.08 }}
-							className="group flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] flex-col rounded-2xl border border-border/50 bg-card/50 p-8 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+							className="group relative flex flex-none basis-[calc(100%-24px)] sm:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] flex-col rounded-xl border border-border bg-card/60 p-8 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md"
 						>
+							<TechCorners />
 							{/* Title */}
 							<h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
 								{project.title}
