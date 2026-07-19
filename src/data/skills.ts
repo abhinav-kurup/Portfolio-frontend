@@ -12,8 +12,9 @@ export const skills: Skill[] = [
   { name: "Django", category: "Frameworks", inProduction: true },
   { name: "Flask", category: "Frameworks", inProduction: false },
   { name: "Celery", category: "Frameworks", inProduction: true },
-  { name: "LangChain", category: "Frameworks", inProduction: false },
-  { name: "LangGraph", category: "Frameworks", inProduction: false },
+  { name: "LangChain", category: "Frameworks", inProduction: true },
+  { name: "LangGraph", category: "Frameworks", inProduction: true },
+  { name: "Llamaindex", category: "Frameworks", inProduction: true },
 
 
   // Databases & Storage
@@ -22,6 +23,7 @@ export const skills: Skill[] = [
   { name: "Redis", category: "Databases", inProduction: true },
   { name: "ChromaDB", category: "Databases", inProduction: true },
   { name: "MongoDB", category: "Databases", inProduction: false },
+  { name: "Qdrant", category: "Databases", inProduction: true },
 
   // DevOps & Tools
   { name: "Docker", category: "DevOps", inProduction: true },
