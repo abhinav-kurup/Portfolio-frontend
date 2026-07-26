@@ -10,22 +10,20 @@ export function CursorFollower() {
 	const mouseX = useMotionValue(-200);
 	const mouseY = useMotionValue(-200);
 
-	// Spring physics configuration for a smooth lagging/smudge trail effect
-	const springConfig = { damping: 35, stiffness: 220, mass: 0.6 };
+	// Physics configuration for target tracking
+	const springConfig = { damping: 30, stiffness: 240, mass: 0.5 };
 	const followerX = useSpring(mouseX, springConfig);
 	const followerY = useSpring(mouseY, springConfig);
 
 	useEffect(() => {
 		setMounted(true);
 		
-		// Only show on devices with a fine pointer (mouse/trackpad)
 		const mediaQuery = window.matchMedia("(pointer: fine)");
 		setHasFinePointer(mediaQuery.matches);
 
 		const handleMouseMove = (e: MouseEvent) => {
-			// Center the smudge (160px width / 2 = 80px)
-			mouseX.set(e.clientX - 80);
-			mouseY.set(e.clientY - 80);
+			mouseX.set(e.clientX - 100);
+			mouseY.set(e.clientY - 100);
 		};
 
 		window.addEventListener("mousemove", handleMouseMove);
@@ -42,13 +40,13 @@ export function CursorFollower() {
 				x: followerX,
 				y: followerY,
 			}}
-			className="pointer-events-none fixed top-0 left-0 z-[9999] h-[160px] w-[160px]"
+			className="pointer-events-none fixed top-0 left-0 z-[9999] h-[200px] w-[200px]"
 		>
-			{/* Multi-layered smudge glow for premium visual depth */}
-			{/* Outer soft glow */}
-			<div className="absolute inset-0 rounded-full bg-primary/5 blur-[40px]" />
-			{/* Inner core smudge */}
-			<div className="absolute top-1/4 left-1/4 h-1/2 w-1/2 rounded-full bg-primary/10 blur-[20px]" />
+			{/* Soft white ambient radial glow */}
+			<div className="absolute inset-0 rounded-full bg-white/[0.035] blur-[50px]" />
+			{/* Inner core target smudge */}
+			<div className="absolute top-1/3 left-1/3 h-1/3 w-1/3 rounded-full bg-white/[0.07] blur-[25px]" />
 		</motion.div>
 	);
 }
+

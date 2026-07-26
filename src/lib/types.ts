@@ -16,6 +16,7 @@ export interface Project {
   description: string;
   stack: string[];
   category: string;
+  isDeployed?: boolean;
   links: {
     github?: string;
     live?: string;
