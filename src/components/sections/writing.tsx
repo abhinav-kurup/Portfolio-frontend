@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { blogPosts } from "@/data/blog";
 import { fadeIn, staggerContainer } from "@/lib/motion";
+import { TechCorners } from "@/components/tech-corners";
 
 export function WritingSection() {
   return (
@@ -17,8 +18,8 @@ export function WritingSection() {
       >
         {/* Section header */}
         <motion.div variants={fadeIn} className="mb-12">
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Writing
+          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground font-mono">
+            [06] Writing
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
             How I think
@@ -32,8 +33,9 @@ export function WritingSection() {
               key={post.id}
               variants={fadeIn}
               href={`/writing/${post.slug}`}
-              className="group flex flex-col rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-xl hover:shadow-primary/5"
+              className="group relative flex flex-col rounded-xl border border-border bg-card/60 p-6 backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-card hover:shadow-md"
             >
+              <TechCorners />
               {/* Tags */}
               <div className="mb-4 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (

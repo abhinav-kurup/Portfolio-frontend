@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, X, Bot, User, Loader2, MessageSquare, Maximize2, Minimize2 } from "lucide-react";
+import { Send, X, Bot, User, Loader2, MessageSquare, Maximize2, Minimize2, Terminal, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TechCorners } from "@/components/tech-corners";
 
 interface Message {
   role: "user" | "assistant";
@@ -11,7 +12,6 @@ interface Message {
 }
 
 function formatMessage(content: string) {
-  // Normalize inline numbered items and bullets to newlines to process them as lists
   let formatted = content.replace(/\s+(\d+\.\s+)/g, "\n$1");
   formatted = formatted.replace(/\s+([•\-\*]\s+)/g, "\n$1");
 
@@ -23,13 +23,13 @@ function formatMessage(content: string) {
     if (currentList) {
       if (currentList.type === "ol") {
         elements.push(
-          <ol key={`list-${key}`} className="list-decimal pl-5 my-1.5 space-y-1">
+          <ol key={`list-${key}`} className="list-decimal pl-5 my-1.5 space-y-1 text-zinc-300">
             {currentList.items}
           </ol>
         );
       } else {
         elements.push(
-          <ul key={`list-${key}`} className="list-disc pl-5 my-1.5 space-y-1">
+          <ul key={`list-${key}`} className="list-disc pl-5 my-1.5 space-y-1 text-zinc-300">
             {currentList.items}
           </ul>
         );
@@ -42,7 +42,6 @@ function formatMessage(content: string) {
     const trimmed = line.trim();
     if (!trimmed) return;
 
-    // Numbered list item (e.g. "1. Item")
     const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
     if (numMatch) {
       if (currentList && currentList.type !== "ol") {
@@ -59,7 +58,6 @@ function formatMessage(content: string) {
       return;
     }
 
-    // Bullet list item (e.g. "- Item" or "* Item" or "• Item")
     const bulletMatch = trimmed.match(/^([\-\*•])\s+(.*)$/);
     if (bulletMatch) {
       if (currentList && currentList.type !== "ul") {
@@ -76,7 +74,6 @@ function formatMessage(content: string) {
       return;
     }
 
-    // Standard text line
     flushList(index);
     elements.push(
       <p key={`p-${index}`} className="my-1.5 first:mt-0 last:mb-0 leading-relaxed">
@@ -94,13 +91,12 @@ export function ChatWidget() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hi! I'm Abhinav's AI assistant. Ask me anything about his experience or projects." }
+    { role: "assistant", content: "ONLINE. I am Abhinav's RAG AI Assistant. Ask me about his Python microservices, LLM orchestration, production RAG pipelines, or engineering experience." }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Wake up the backend on load
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/chat/";
     const baseUrl = apiUrl.split("/api")[0];
     fetch(`${baseUrl}/health`).catch((err) => console.log("Backend health check failed:", err));
@@ -129,12 +125,13 @@ export function ChatWidget() {
     }
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (messageText?: string) => {
+    const textToSend = messageText || input;
+    if (!textToSend.trim() || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: input };
+    const userMessage: Message = { role: "user", content: textToSend };
     setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+    if (!messageText) setInput("");
     setIsLoading(true);
 
     const chatHistory = messages.slice(-5);
@@ -145,7 +142,7 @@ export function ChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          message: input,
+          message: textToSend,
           history: chatHistory,
           stream: true,
         }),
@@ -204,7 +201,6 @@ export function ChatWidget() {
         }
       }
 
-      // Handle any remaining content in the buffer
       if (buffer.trim().startsWith("data: ")) {
         try {
           const jsonStr = buffer.trim().slice(6);
@@ -231,7 +227,7 @@ export function ChatWidget() {
       console.error("Error during stream chat:", error);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Sorry, I'm having trouble connecting to the backend right now." }
+        { role: "assistant", content: "ERR_CONNECTION_FAILED: Offline mode active. Connect backend to enable real-time inference." }
       ]);
     } finally {
       setIsLoading(false);
@@ -240,14 +236,15 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Trigger Button (Exported to be used in Hero if needed, or floating) */}
+      {/* Trigger Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setIsOpen(true)}
           size="lg"
-          className="h-14 w-14 rounded-full shadow-2xl shadow-primary/20"
+          className="h-14 w-14 rounded-full border border-white/20 bg-zinc-950 text-white shadow-2xl hover:bg-white hover:text-black hover:scale-105 transition-all group"
+          title="Open AI Assistant Terminal"
         >
-          <MessageSquare size={24} />
+          <Terminal size={22} className="group-hover:rotate-12 transition-transform" />
         </Button>
       </div>
 
@@ -257,67 +254,72 @@ export function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`fixed bottom-24 right-6 z-50 overflow-hidden rounded-2xl border border-border/50 bg-background/95 shadow-2xl backdrop-blur-xl transition-all duration-300 ${
+            className={`fixed bottom-24 right-6 z-50 overflow-hidden rounded-2xl border border-white/20 bg-zinc-950/95 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
               isExpanded 
                 ? "w-[95vw] max-w-[800px] sm:w-[800px]" 
-                : "w-[90vw] max-w-[400px] sm:w-[400px]"
+                : "w-[92vw] max-w-[420px] sm:w-[420px]"
             }`}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-border/50 bg-primary/5 px-4 py-4 sm:px-6">
-              <div className="flex items-center gap-2 sm:gap-3">
+            <TechCorners />
+
+            {/* Header Bar */}
+            <div className="flex items-center justify-between border-b border-white/10 bg-zinc-900/80 px-4 py-3 sm:px-6">
+              <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="rounded-lg p-2 bg-primary/10 text-primary hover:bg-primary/20 transition-colors mr-1"
+                  className="rounded-lg p-1.5 border border-white/15 bg-zinc-800 text-zinc-300 hover:bg-white hover:text-black transition-colors"
                   title={isExpanded ? "Shrink chat" : "Expand chat"}
                 >
-                  {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+                  {isExpanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
                 </button>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Bot size={20} />
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white text-black font-bold text-xs">
+                  <Terminal size={14} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-foreground">Ask AI</h3>
+                  <h3 className="font-mono text-xs font-bold text-white">AI_AGENT_RAG_V1.0</h3>
                   <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-medium text-muted-foreground">Online</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="font-mono text-[10px] text-zinc-400">ONLINE // 200ms</span>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                className="rounded-lg p-1.5 text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
 
-            {/* Messages */}
+            {/* Messages Area */}
             <div
               ref={scrollRef}
-              className={`overflow-y-auto px-6 py-6 scroll-smooth transition-all duration-300 ${
-                isExpanded ? "h-[600px] sm:h-[60vh]" : "h-[400px]"
+              className={`overflow-y-auto px-5 py-5 scroll-smooth transition-all duration-300 font-mono text-xs ${
+                isExpanded ? "h-[580px] sm:h-[60vh]" : "h-[380px]"
               }`}
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 {messages.map((msg, i) => (
                   <div
                     key={i}
                     className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`flex max-w-[85%] gap-3 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"
-                        }`}
+                      className={`flex max-w-[88%] gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                     >
-                      <div className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
-                        }`}>
-                        {msg.role === "user" ? <User size={14} /> : <Bot size={14} />}
+                      <div className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-bold text-[10px] ${
+                        msg.role === "user" 
+                          ? "border-white bg-white text-black" 
+                          : "border-white/20 bg-zinc-900 text-white"
+                      }`}>
+                        {msg.role === "user" ? "YOU" : <Bot size={13} />}
                       </div>
                       <div
-                        className={`select-text rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${msg.role === "user"
-                            ? "bg-primary text-primary-foreground shadow-lg shadow-primary/10 rounded-tr-none"
-                            : "bg-muted/50 text-foreground rounded-tl-none border border-border/20"
-                          }`}
+                        className={`select-text rounded-xl px-4 py-3 text-xs leading-relaxed ${
+                          msg.role === "user"
+                            ? "bg-white text-black font-semibold shadow-lg"
+                            : "bg-zinc-900/90 text-zinc-200 border border-white/15 backdrop-blur-md"
+                        }`}
                       >
                         {formatMessage(msg.content)}
                       </div>
@@ -326,14 +328,13 @@ export function ChatWidget() {
                 ))}
                 {isLoading && messages[messages.length - 1].role === "user" && (
                   <div className="flex justify-start">
-                    <div className="flex gap-3">
-                      <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-muted text-foreground">
-                        <Bot size={14} />
+                    <div className="flex gap-2.5">
+                      <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-md border border-white/20 bg-zinc-900 text-white">
+                        <Bot size={13} />
                       </div>
-                      <div className="flex items-center gap-1 rounded-2xl bg-muted/50 px-4 py-2.5">
-                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40" />
-                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.2s]" />
-                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-primary/40 [animation-delay:0.4s]" />
+                      <div className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-zinc-900 px-4 py-3">
+                        <span className="h-1.5 w-1.5 animate-ping rounded-full bg-white" />
+                        <span className="text-[11px] text-zinc-400 font-mono">INFERRING_RESPONSE...</span>
                       </div>
                     </div>
                   </div>
@@ -341,8 +342,24 @@ export function ChatWidget() {
               </div>
             </div>
 
-            {/* Input */}
-            <div className="border-t border-border/50 p-4 bg-background/50">
+            {/* Quick Prompt Pills */}
+            <div className="px-4 py-2 border-t border-white/10 bg-zinc-900/40 flex gap-2 overflow-x-auto scrollbar-none font-mono text-[10px]">
+              <button
+                onClick={() => handleSend("What's Abhinav's FastAPI & Python experience?")}
+                className="shrink-0 rounded-md border border-white/15 bg-zinc-950 px-2.5 py-1 text-zinc-300 hover:border-white hover:text-white transition-colors"
+              >
+                &gt; FastAPI Experience
+              </button>
+              <button
+                onClick={() => handleSend("Tell me about DocuMind RAG project.")}
+                className="shrink-0 rounded-md border border-white/15 bg-zinc-950 px-2.5 py-1 text-zinc-300 hover:border-white hover:text-white transition-colors"
+              >
+                &gt; DocuMind RAG
+              </button>
+            </div>
+
+            {/* Input Bar */}
+            <div className="border-t border-white/10 p-4 bg-zinc-950">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -354,19 +371,19 @@ export function ChatWidget() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me anything..."
-                  className="w-full rounded-xl border border-border/50 bg-background/50 py-3 pl-4 pr-12 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                  placeholder="Type query or command..."
+                  className="w-full rounded-xl border border-white/20 bg-zinc-900 py-3 pl-4 pr-12 font-mono text-xs text-white placeholder:text-zinc-500 focus:border-white focus:outline-none focus:ring-1 focus:ring-white transition-all"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-primary p-1.5 text-primary-foreground hover:opacity-90 disabled:opacity-50 transition-all"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-white p-2 text-black hover:bg-zinc-200 disabled:opacity-40 transition-all font-bold"
                 >
-                  {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                  {isLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
                 </button>
               </form>
-              <p className="mt-2 text-center text-[10px] text-muted-foreground/60">
-                Powered by Abhinav's Portfolio AI
+              <p className="mt-2 text-center font-mono text-[10px] text-zinc-500">
+                POWERED BY RAG // RETRIEVAL AUGMENTED INFERENCE
               </p>
             </div>
           </motion.div>
@@ -375,3 +392,6 @@ export function ChatWidget() {
     </>
   );
 }
+
+
+

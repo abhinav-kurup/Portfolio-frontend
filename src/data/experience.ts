@@ -17,7 +17,7 @@ export const experiences: Experience[] = [
     period: "Jan 2024 - Jul 2024",
     impact:
       "Built and owned the backend for a live, cloud-based business platform, from architecture and core service design to production deployment. Developed an AI-powered chatbot, scalable Django APIs, an asynchronous AWS messaging pipeline processing thousands of messages daily, and containerized deployments on Amazon ECS.",
-    stack: ["RAG", "LLM", "Django", "AWS", "SQS", "ECS", "PostgreSQL", "Redis",],
+    stack: ["RAG", "LLM", "Django", "AWS", "SQS", "ECS", "PostgreSQL", "Redis"],
   },
   {
     id: "exp-3",
@@ -29,3 +29,4 @@ export const experiences: Experience[] = [
     stack: ["Python", "Django", "PostgreSQL", "PostGIS", "GeoServer", "Firebase"],
   },
 ];
+

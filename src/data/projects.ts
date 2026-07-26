@@ -9,6 +9,7 @@ export const projects: Project[] = [
       "A production RAG system using LangGraph, Whisper, FastAPI and ChromaDB for intelligent document Q&A with streaming responses.",
     stack: ["Python", "FastAPI", "LangGraph", "Whisper", "Streamlit", "Groq", "ChromaDB",],
     category: "AI",
+    isDeployed: true,
     links: {
       github: "https://github.com/abhinav-kurup/Documind",
       deepDive: "/projects/documind",
@@ -22,6 +23,7 @@ export const projects: Project[] = [
       "A collaborative writing platform with CRDT-based conflict resolution, WebSocket sync, and rich text editing for Google Docs-style multi-user collaboration.",
     stack: ["Python", "FastAPI", "Async", "WebSockets", "PostgreSQL", "Redis"],
     category: "Backend",
+    isDeployed: true,
     links: {
       github: "https://github.com/abhinav-kurup/CollabWrite",
       deepDive: "/projects/collabwrite",
@@ -71,6 +73,7 @@ export const projects: Project[] = [
       "A robust backend AI service built with FastAPI providing real-time, context-aware chatbot inference, retrieval-augmented pipelines, streaming responses, and scalable vector storage for document context. The frontend is a static Next.js 15 site.",
     stack: ["FastAPI", "Python", "Gemini", "SQLlite", "Next.js", "TypeScript"],
     category: "Backend",
+    isDeployed: true,
     links: {
       github: "https://github.com/abhinav-kurup/Portfolio-backend",
     },

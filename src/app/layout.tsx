@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import { Suspense } from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ChatWidget } from "@/components/chat-widget";
 import { CursorFollower } from "@/components/cursor-follower";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
+import { PostHogPageView } from "@/components/providers/posthog-pageview";
 import "./globals.css";
 
 
@@ -50,14 +53,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} dark h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
-        <Footer />
-        <ChatWidget />
-        <CursorFollower />
+        <PostHogProvider>
+          <Suspense fallback={null}>
+            <PostHogPageView />
+          </Suspense>
+          <Navbar />
+          <main className="flex-1 pt-16">{children}</main>
+          <Footer />
+          <ChatWidget />
+          <CursorFollower />
+        </PostHogProvider>
       </body>
     </html>
   );
 }
+
