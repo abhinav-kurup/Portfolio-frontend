@@ -141,7 +141,7 @@ export function ChatWidget() {
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           message: textToSend,
           history: chatHistory,
           stream: true,
@@ -159,7 +159,7 @@ export function ChatWidget() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder("utf-8");
       let buffer = "";
-      
+
       const assistantMessage: Message = { role: "assistant", content: "" };
       setMessages((prev) => [...prev, assistantMessage]);
 
@@ -254,11 +254,10 @@ export function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`fixed bottom-24 right-6 z-50 overflow-hidden rounded-2xl border border-white/20 bg-zinc-950/95 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
-              isExpanded 
-                ? "w-[95vw] max-w-[800px] sm:w-[800px]" 
+            className={`fixed bottom-24 right-6 z-50 overflow-hidden rounded-2xl border border-white/20 bg-zinc-950/95 shadow-2xl backdrop-blur-2xl transition-all duration-300 ${isExpanded
+                ? "w-[95vw] max-w-[800px] sm:w-[800px]"
                 : "w-[92vw] max-w-[420px] sm:w-[420px]"
-            }`}
+              }`}
           >
             <TechCorners />
 
@@ -294,9 +293,8 @@ export function ChatWidget() {
             {/* Messages Area */}
             <div
               ref={scrollRef}
-              className={`overflow-y-auto px-5 py-5 scroll-smooth transition-all duration-300 font-mono text-xs ${
-                isExpanded ? "h-[580px] sm:h-[60vh]" : "h-[380px]"
-              }`}
+              className={`overflow-y-auto px-5 py-5 scroll-smooth transition-all duration-300 font-mono text-xs ${isExpanded ? "h-[580px] sm:h-[60vh]" : "h-[380px]"
+                }`}
             >
               <div className="flex flex-col gap-4">
                 {messages.map((msg, i) => (
@@ -307,19 +305,17 @@ export function ChatWidget() {
                     <div
                       className={`flex max-w-[88%] gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                     >
-                      <div className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-bold text-[10px] ${
-                        msg.role === "user" 
-                          ? "border-white bg-white text-black" 
+                      <div className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-bold text-[10px] ${msg.role === "user"
+                          ? "border-white bg-white text-black"
                           : "border-white/20 bg-zinc-900 text-white"
-                      }`}>
+                        }`}>
                         {msg.role === "user" ? "YOU" : <Bot size={13} />}
                       </div>
                       <div
-                        className={`select-text rounded-xl px-4 py-3 text-xs leading-relaxed ${
-                          msg.role === "user"
+                        className={`select-text rounded-xl px-4 py-3 text-xs leading-relaxed ${msg.role === "user"
                             ? "bg-white text-black font-semibold shadow-lg"
                             : "bg-zinc-900/90 text-zinc-200 border border-white/15 backdrop-blur-md"
-                        }`}
+                          }`}
                       >
                         {formatMessage(msg.content)}
                       </div>
@@ -345,10 +341,10 @@ export function ChatWidget() {
             {/* Quick Prompt Pills */}
             <div className="px-4 py-2 border-t border-white/10 bg-zinc-900/40 flex gap-2 overflow-x-auto scrollbar-none font-mono text-[10px]">
               <button
-                onClick={() => handleSend("What's Abhinav's FastAPI & Python experience?")}
+                onClick={() => handleSend("What's Abhinav's Agentic AI experience?")}
                 className="shrink-0 rounded-md border border-white/15 bg-zinc-950 px-2.5 py-1 text-zinc-300 hover:border-white hover:text-white transition-colors"
               >
-                &gt; FastAPI Experience
+                &gt; Agentic AI Experience
               </button>
               <button
                 onClick={() => handleSend("Tell me about DocuMind RAG project.")}
