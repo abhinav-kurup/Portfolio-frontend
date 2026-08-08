@@ -40,7 +40,7 @@ export function HeroSection() {
       : `cat ~/contact_channels.txt`;
 
   const fullCandidateInfo = `Name: Abhinav Kurup
-Role: AI & Backend Engineer (2+ Yrs Experience)
+Role: AI & Backend Engineer (3+ Yrs Experience)
 BASE: India (Open to Remote / Relocation)
 Email: abhinavkurup00@gmail.com
 LinkedIn: https://linkedin.com/in/abhinav-kurup
@@ -202,7 +202,7 @@ Core Technologies: Python 3.12, FastAPI, LangGraph, LangChain, Celery, Redis, Po
                 <div className="absolute -left-6 top-6 z-20">
                   <div className="flex items-center gap-2 rounded-lg border border-white/20 bg-zinc-950/95 px-3.5 py-2 font-mono text-xs shadow-2xl backdrop-blur-xl">
                     <Cpu size={14} className="text-white" />
-                    <span className="text-white font-bold">2+ YRS EXP</span>
+                    <span className="text-white font-bold">3+ YRS EXP</span>
                   </div>
                 </div>
               </div>
@@ -279,7 +279,7 @@ Core Technologies: Python 3.12, FastAPI, LangGraph, LangChain, Celery, Redis, Po
                   <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     <p><span className="text-zinc-500 font-bold">NAME        :</span> <span className="text-white font-bold">Abhinav Kurup</span></p>
                     <p><span className="text-zinc-500 font-bold">ROLE        :</span> <span className="text-white font-bold">AI & Backend Engineer</span></p>
-                    <p><span className="text-zinc-500 font-bold">EXPERIENCE  :</span> <span className="text-white font-bold">2+ Years Production</span></p>
+                    <p><span className="text-zinc-500 font-bold">EXPERIENCE  :</span> <span className="text-white font-bold">3+ Years Production</span></p>
                     <p><span className="text-zinc-500 font-bold">BASE    :</span> <span className="text-white font-bold">India (Open to Remote / Relocation)</span></p>
                     <p><span className="text-zinc-500 font-bold">EMAIL       :</span> <a href="mailto:abhinavkurup00@gmail.com" className="text-emerald-400 hover:underline font-bold">abhinavkurup00@gmail.com</a></p>
                     <p><span className="text-zinc-500 font-bold">LINKEDIN    :</span> <a href="https://linkedin.com/in/abhinav-kurup" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline font-bold">linkedin.com/in/abhinav-kurup</a></p>
