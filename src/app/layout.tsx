@@ -23,6 +23,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://abhinav-kurup.vercel.app"),
   title: "Abhinav | AI & Backend Engineer",
   description:
     "AI & Backend engineer specializing in Python, FastAPI, LLM orchestration, production RAG pipelines, and distributed systems.",
@@ -38,12 +39,21 @@ export const metadata: Metadata = {
     "Portfolio",
     "Software Engineer",
   ],
-  authors: [{ name: "Abhinav" }],
+  authors: [{ name: "Abhinav Kurup" }],
   openGraph: {
     title: "Abhinav | AI & Backend Engineer",
     description:
-      "AI & Backend engineer specializing in Python, FastAPI, distributed systems, and production RAG pipelines.",
+      "AI & Backend Engineer building Agentic AI, RAG systems, and scalable Python backends.",
+    url: "https://abhinav-kurup.vercel.app",
+    siteName: "Abhinav Kurup",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abhinav | AI & Backend Engineer",
+    description:
+      "AI & Backend Engineer building Agentic AI, RAG systems, and scalable Python backends.",
   },
 };
 
